@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  --color-background: #FAFAFA; /* Neutral 50 - slightly off-white for confident/premium feel */
+  --color-foreground: #171717; /* Neutral 950 */
+  
+  --color-muted: #F5F5F5;
+  --color-muted-foreground: #737373; /* Neutral 500 */
+  
+  --color-border: #E5E5E5; /* Neutral 200 */
+  
+  --color-primary: #171717;
+  --color-primary-foreground: #FFFFFF;
+
+  --color-accent: #2563EB; /* A confident engineering blue */
+  --color-accent-foreground: #FFFFFF;
+}
+
+/* Custom utilities */
+@layer utilities {
+  .container-custom {
+    @apply max-w-5xl mx-auto px-6 md:px-8;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
