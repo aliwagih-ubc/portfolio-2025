@@ -1,60 +1,81 @@
 import { HeroSection } from "@/components/hero-section";
-import { JourneyStrip } from "@/components/journey-strip";
-import { ProjectGrid } from "@/components/project-grid";
+import { VisualJourney } from "@/components/visual-journey";
 import { HowIWork } from "@/components/how-i-work";
 import { ContactSection } from "@/components/contact-section";
 import { SectionHeading } from "@/components/section-heading";
+import { FeaturedProjectTeaser } from "@/components/featured-project-teaser";
 import { projects } from "@/data/projects";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
-  const featuredProjects = projects.filter(p => p.featured).slice(0, 4);
+  const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
+      {/* Hero Section */}
       <HeroSection
-        eyebrow="Civil Engineer → Consulting PM → CS Student → AI Builder"
-        title="Bridging engineering reality with the power of software."
+        title="Field-tested builder bridging engineering reality with AI."
         description={
-          <>
-            <p>
-              I build AI-powered solutions for the physical world. With a background delivering high-stakes marine infrastructure projects, I know that software only matters if it works in the field.
-            </p>
-            <p>
-              Now, I combine systems thinking with modern engineering to help teams make better decisions under pressure.
-            </p>
-          </>
+          <p>
+            I build AI-powered solutions for the physical world. With a
+            background delivering high-stakes marine infrastructure, I know that
+            software only matters if it works in the field.
+          </p>
         }
-        primaryCta={{ label: "See Projects", href: "/projects" }}
-        secondaryCta={{ label: "My Story", href: "/about" }}
-        status="Currently: PM on Marine Infrastructure • CS Student • Building Stealth Ops Platform"
+        primaryCta={{ label: "View Projects", href: "/projects" }}
+        secondaryCta={{ label: "Get in Touch", href: "mailto:contact@aliwagih.com" }}
+        status="Currently: PM on Marine Infrastructure • CS Student • Building Ops Platform"
+        showWaves
       />
 
-      <JourneyStrip />
+      {/* How I Work */}
+      <HowIWork />
 
-      <section className="py-24 container-custom">
-        <div className="flex justify-between items-end mb-12">
-          <SectionHeading
-            title="Featured Projects"
-            className="mb-0" // Override margin since we handle it in container
-          />
-          <Link href="/projects" className="hidden md:inline-flex items-center text-sm font-medium text-accent hover:text-accent/80 transition-colors">
-            View all projects <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </div>
+      {/* Featured Projects */}
+      <section className="py-24 md:py-32">
+        <div className="container-custom">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
+            <SectionHeading
+              title="Featured Projects"
+              subtitle="Products, prototypes, and concepts exploring the intersection of construction and AI."
+              className="mb-0"
+            />
+            <Link
+              href="/projects"
+              className="hidden md:inline-flex items-center text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+            >
+              View all projects
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
 
-        <ProjectGrid projects={featuredProjects} />
+          <div className="space-y-4">
+            {featuredProjects.map((project, index) => (
+              <FeaturedProjectTeaser
+                key={project.slug}
+                project={project}
+                index={index}
+              />
+            ))}
+          </div>
 
-        <div className="mt-12 text-center md:hidden">
-          <Link href="/projects" className="inline-flex items-center text-sm font-medium text-accent hover:text-accent/80 transition-colors">
-            View all projects <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
+          <div className="mt-8 text-center md:hidden">
+            <Link
+              href="/projects"
+              className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+            >
+              View all projects
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      <HowIWork />
+      {/* Journey Timeline */}
+      <VisualJourney />
 
+      {/* Contact CTA */}
       <ContactSection />
     </div>
   );

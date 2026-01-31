@@ -1,40 +1,128 @@
 @import "tailwindcss";
 
-@import "tailwindcss";
-
 @theme {
+  /* Fonts */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  
-  --color-background: #FAFAFA; /* Neutral 50 - slightly off-white for confident/premium feel */
-  --color-foreground: #171717; /* Neutral 950 */
-  
-  --color-muted: #F5F5F5;
-  --color-muted-foreground: #737373; /* Neutral 500 */
-  
-  --color-border: #E5E5E5; /* Neutral 200 */
-  
-  --color-primary: #171717;
-  --color-primary-foreground: #FFFFFF;
+  --font-display: var(--font-space-grotesk), var(--font-sans);
 
-  --color-accent: #2563EB; /* A confident engineering blue */
-  --color-accent-foreground: #FFFFFF;
+  /* Dark Theme - Slate-950 Base */
+  --color-background: #020617;        /* slate-950 - near black */
+  --color-foreground: #f8fafc;        /* slate-50 - off white */
+
+  /* Card & Surface colors */
+  --color-card: #0f172a;              /* slate-900 */
+  --color-card-elevated: #1e293b;     /* slate-800 */
+
+  /* Muted backgrounds */
+  --color-muted: #1e293b;             /* slate-800 */
+  --color-muted-foreground: #94a3b8;  /* slate-400 */
+
+  /* Borders */
+  --color-border: #334155;            /* slate-700 */
+  --color-border-subtle: #1e293b;     /* slate-800 */
+
+  /* Primary - Near black text */
+  --color-primary: #f8fafc;           /* slate-50 for text on dark */
+  --color-primary-foreground: #020617; /* slate-950 for text on light buttons */
+
+  /* Accent Primary - Orange */
+  --color-accent: #f97316;            /* orange-500 */
+  --color-accent-hover: #fb923c;      /* orange-400 */
+  --color-accent-foreground: #020617; /* slate-950 */
+
+  /* Accent Secondary - Cyan */
+  --color-cyan: #06b6d4;              /* cyan-500 */
+  --color-cyan-glow: rgba(6, 182, 212, 0.4);
+
+  /* Ring for focus states */
+  --color-ring: #f97316;              /* orange-500 */
 }
 
 /* Custom utilities */
 @layer utilities {
   .container-custom {
-    @apply max-w-5xl mx-auto px-6 md:px-8;
+    @apply max-w-6xl mx-auto px-6 md:px-8;
   }
-  
+
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Glow effects */
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1);
+  }
+
+  .glow-orange-subtle {
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+  }
+
+  .glow-cyan-subtle {
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+  }
+
+  /* Gradient text */
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-cyan {
+    @apply bg-gradient-to-r from-cyan-400 to-teal-500 bg-clip-text text-transparent;
+  }
+
+  /* Card styles */
+  .card-dark {
+    @apply bg-card border border-border/50 rounded-xl;
+  }
+
+  .card-dark-elevated {
+    @apply bg-card-elevated border border-border/50 rounded-xl;
+  }
+
+  /* Button glow on hover */
+  .btn-glow-orange:hover {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.4), 0 0 40px rgba(249, 115, 22, 0.2);
+  }
+
+  .btn-glow-cyan:hover {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), 0 0 40px rgba(6, 182, 212, 0.2);
+  }
 }
 
+/* Base body styles */
 body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection colors */
+::selection {
+  background: rgba(249, 115, 22, 0.3);
+  color: #f8fafc;
+}
+
+/* Scrollbar styling for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }

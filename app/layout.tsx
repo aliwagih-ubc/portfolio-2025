@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // focused on clean, neutral look
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
@@ -8,12 +8,20 @@ import { Footer } from "@/components/footer";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  display: 'swap',
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: "Ali Wagih | Engineer & AI Builder",
-  description: "Civil engineer turned software engineer. Building AI solutions for the physical world.",
+  description:
+    "Field-tested builder bridging engineering reality with AI. Civil engineer turned software engineer building solutions for the physical world.",
 };
 
 export default function RootLayout({
@@ -26,13 +34,12 @@ export default function RootLayout({
       <body
         className={cn(
           "antialiased min-h-screen font-sans bg-background text-foreground flex flex-col",
-          inter.variable
+          inter.variable,
+          spaceGrotesk.variable
         )}
       >
         <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

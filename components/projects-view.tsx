@@ -8,10 +8,9 @@ import { cn } from "@/lib/utils";
 
 interface ProjectsViewProps {
     projects: Project[];
-    allTags: string[];
 }
 
-export function ProjectsView({ projects, allTags }: ProjectsViewProps) {
+export function ProjectsView({ projects }: ProjectsViewProps) {
     const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
     const [searchQuery, setSearchQuery] = useState("");
 
