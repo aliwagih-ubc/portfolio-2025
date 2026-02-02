@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { GradientWaves } from "./gradient-waves";
+import { SplitText } from "@/components/ui/split-text";
 
 interface HeroSectionProps {
   eyebrow?: string;
@@ -28,9 +29,8 @@ export function HeroSection({
 }: HeroSectionProps) {
   return (
     <section
-      className={`relative overflow-hidden ${
-        compact ? "pt-16 pb-12 md:pt-20 md:pb-16" : "pt-24 pb-16 md:pt-32 md:pb-24"
-      }`}
+      className={`relative overflow-hidden ${compact ? "pt-16 pb-12 md:pt-20 md:pb-16" : "pt-24 pb-16 md:pt-32 md:pb-24"
+        }`}
     >
       {/* Background Waves */}
       {showWaves && <GradientWaves />}
@@ -53,14 +53,12 @@ export function HeroSection({
             </motion.span>
           )}
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+          <SplitText
+            text={title}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-8 text-balance leading-[1.1]"
-          >
-            {title}
-          </motion.h1>
+            delay={0.15}
+            triggerOnScroll={false}
+          />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

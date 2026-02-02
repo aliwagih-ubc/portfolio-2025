@@ -25,7 +25,7 @@ export default function Home() {
         }
         primaryCta={{ label: "View Projects", href: "/projects" }}
         secondaryCta={{ label: "Get in Touch", href: "mailto:contact@aliwagih.com" }}
-        status="Currently: PM on Marine Infrastructure • CS Student • Building Ops Platform"
+        status="Available for new projects"
         showWaves
       />
 
@@ -33,7 +33,7 @@ export default function Home() {
       <HowIWork />
 
       {/* Featured Projects */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
             <SectionHeading
