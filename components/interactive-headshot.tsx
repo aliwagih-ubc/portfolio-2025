@@ -68,8 +68,8 @@ export function InteractiveHeadshot() {
               alt="Ali Wagih"
               fill
               className={`object-cover transition-all duration-700 ease-out ${isHovered
-                  ? "grayscale-0 scale-[1.02] contrast-[1.08]"
-                  : "grayscale-[0.3] scale-100 contrast-[1.02]"
+                ? "grayscale-0 scale-[1.02] contrast-[1.08]"
+                : "grayscale-[0.3] scale-100 contrast-[1.02]"
                 }`}
               style={{ filter: "url(#sharpen)" }}
               priority
@@ -191,18 +191,6 @@ export function InteractiveHeadshot() {
               </motion.div>
             </motion.div>
 
-            {/* Connecting arc/line - PROMINENT */}
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              exit={{ scaleX: 0, opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[4px] origin-center z-10"
-              style={{
-                background: "linear-gradient(90deg, rgba(245,158,11,1) 0%, rgba(255,255,255,0.5) 50%, rgba(6,182,212,1) 100%)",
-                boxShadow: "0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(249,115,22,0.4), 0 0 80px rgba(6,182,212,0.4)",
-              }}
-            />
           </>
         )}
       </AnimatePresence>

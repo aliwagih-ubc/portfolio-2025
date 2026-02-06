@@ -56,7 +56,7 @@ export function HowIWork() {
       <div className="container-custom relative z-10">
         <SectionHeading
           title="How I Work"
-          subtitle="Software success isn't just code. It's understanding the reality of where that code lives."
+          subtitle="Software success isn't just code. It's understanding the reality of where that code&nbsp;lives."
         />
 
         <motion.div

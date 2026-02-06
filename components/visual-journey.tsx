@@ -151,7 +151,7 @@ export function VisualJourney() {
                   <motion.div
                     className={cn(
                       "flex-1 max-w-md",
-                      isLeft ? "md:text-right md:pr-12" : "md:text-left md:pl-12"
+                      "md:text-left md:pl-12"
                     )}
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
@@ -166,7 +166,7 @@ export function VisualJourney() {
                       <div
                         className={cn(
                           "flex items-center gap-4 mb-4",
-                          isLeft ? "md:flex-row-reverse" : "md:flex-row"
+                          "md:flex-row"
                         )}
                       >
                         <div
@@ -196,7 +196,7 @@ export function VisualJourney() {
                       <div
                         className={cn(
                           "flex items-center gap-2 pt-4 border-t border-border/30",
-                          isLeft ? "md:flex-row-reverse" : "md:flex-row"
+                          "md:flex-row"
                         )}
                       >
                         <span
