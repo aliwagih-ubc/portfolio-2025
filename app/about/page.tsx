@@ -68,7 +68,7 @@ export default function About() {
     <div className="flex flex-col">
       <HeroSection
         eyebrow="My Journey"
-        title="From concrete and steel to code and cloud."
+        title={["From concrete and steel", "to code and cloud."]}
         description={
           <p>
             I spent years managing complex marine construction projects. Now, I

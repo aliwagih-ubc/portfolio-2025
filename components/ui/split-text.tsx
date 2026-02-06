@@ -57,7 +57,7 @@ export function SplitText({
         >
             {words.map((word, index) => (
                 <Fragment key={index}>
-                    <span className="inline-block overflow-hidden align-top">
+                    <span className="inline-block overflow-hidden align-top pb-2">
                         <motion.span
                             variants={child}
                             className="inline-block relative"

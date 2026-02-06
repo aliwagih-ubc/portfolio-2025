@@ -27,25 +27,25 @@ export function InteractiveHeadshot() {
         </defs>
       </svg>
 
-      {/* Ambient glow behind subject - shifts color on hover */}
+      {/* Ambient glow behind subject - intensifies dramatically on hover */}
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full blur-[80px] pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] rounded-full blur-[100px] pointer-events-none"
         animate={{
           background: isHovered
-            ? "radial-gradient(circle, rgba(249,115,22,0.3) 0%, rgba(6,182,212,0.2) 50%, transparent 70%)"
+            ? "radial-gradient(circle, rgba(249,115,22,0.5) 0%, rgba(6,182,212,0.4) 50%, transparent 70%)"
             : "radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 60%)",
-          scale: isHovered ? 1.2 : 1,
+          scale: isHovered ? 1.4 : 1,
         }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       />
 
-      {/* Main image container - no card, uses mask for edge blending */}
+      {/* Main image container */}
       <motion.div
         className="relative aspect-[5/7] overflow-visible"
-        animate={{ scale: isHovered ? 1.02 : 1 }}
+        animate={{ scale: isHovered ? 1.03 : 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        {/* The headshot with edge fade mask */}
+        {/* Split-screen layer container */}
         <div
           className="relative w-full h-full"
           style={{
@@ -55,18 +55,67 @@ export function InteractiveHeadshot() {
               "radial-gradient(ellipse 90% 95% at 50% 50%, black 50%, transparent 100%)",
           }}
         >
-          <Image
-            src="/headshot-cropped.png"
-            alt="Ali Wagih"
-            fill
-            className={`object-cover transition-all duration-700 ease-out ${
-              isHovered
-                ? "grayscale-0 scale-[1.03] contrast-[1.05]"
-                : "grayscale-[0.3] scale-100 contrast-[1.02]"
-            }`}
-            style={{ filter: "url(#sharpen)" }}
-            priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
+          {/* Base image layer - shifted slightly right */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              x: isHovered ? 8 : 0,
+            }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <Image
+              src="/headshot-cropped.png"
+              alt="Ali Wagih"
+              fill
+              className={`object-cover transition-all duration-700 ease-out ${isHovered
+                  ? "grayscale-0 scale-[1.02] contrast-[1.08]"
+                  : "grayscale-[0.3] scale-100 contrast-[1.02]"
+                }`}
+              style={{ filter: "url(#sharpen)" }}
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
+            />
+          </motion.div>
+
+          {/* Amber (Construction) overlay - left side - INTENSE */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            animate={{
+              opacity: isHovered ? 0.5 : 0,
+            }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(245,158,11,0.7) 0%, rgba(245,158,11,0.4) 35%, transparent 55%)",
+            }}
+          />
+
+          {/* Cyan (Software) overlay - right side - INTENSE */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            animate={{
+              opacity: isHovered ? 0.5 : 0,
+            }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            style={{
+              background:
+                "linear-gradient(270deg, rgba(6,182,212,0.7) 0%, rgba(6,182,212,0.4) 35%, transparent 55%)",
+            }}
+          />
+
+          {/* Central dividing line on hover - BOLD */}
+          <motion.div
+            className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[3px]"
+            animate={{
+              opacity: isHovered ? 0.8 : 0,
+              scaleY: isHovered ? 1 : 0,
+            }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 5%, rgba(255,255,255,0.9) 30%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.9) 70%, transparent 95%)",
+              boxShadow: "0 0 20px rgba(255,255,255,0.5)",
+            }}
           />
         </div>
 
@@ -74,13 +123,13 @@ export function InteractiveHeadshot() {
         <motion.div
           className="absolute inset-0 pointer-events-none"
           animate={{
-            opacity: isHovered ? 0.15 : 0,
+            opacity: isHovered ? 0.08 : 0,
           }}
           transition={{ duration: 0.4 }}
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-            backgroundSize: "30px 30px",
+              "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+            backgroundSize: "25px 25px",
           }}
         />
 
@@ -89,19 +138,7 @@ export function InteractiveHeadshot() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(2,6,23,0.4) 100%)",
-          }}
-        />
-
-        {/* Bottom gradient fade for text/badges */}
-        <motion.div
-          className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
-          animate={{
-            opacity: isHovered ? 1 : 0,
-          }}
-          transition={{ duration: 0.4 }}
-          style={{
-            background: "linear-gradient(to top, rgba(2,6,23,0.9) 0%, transparent 100%)",
+              "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(2,6,23,0.5) 100%)",
           }}
         />
       </motion.div>
@@ -112,21 +149,21 @@ export function InteractiveHeadshot() {
           <>
             {/* Engineering badge - left */}
             <motion.div
-              initial={{ opacity: 0, x: -20, y: 10 }}
+              initial={{ opacity: 0, x: -40, y: 10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
-              exit={{ opacity: 0, x: -20, y: 10 }}
+              exit={{ opacity: 0, x: -40, y: 10 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 z-20"
+              className="absolute left-0 md:-left-8 top-1/2 -translate-y-1/2 z-20"
             >
               <motion.div
-                animate={{ y: [0, -6, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="flex flex-col items-center gap-2"
               >
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-background/80 backdrop-blur-sm border border-amber-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.3)]">
-                  <HardHat className="w-6 h-6 md:w-7 md:h-7 text-amber-500" />
+                <div className="w-14 h-14 md:w-18 md:h-18 rounded-xl bg-background/95 backdrop-blur-md border-2 border-amber-500/60 flex items-center justify-center shadow-[0_0_50px_rgba(245,158,11,0.5)]">
+                  <HardHat className="w-7 h-7 md:w-9 md:h-9 text-amber-500" />
                 </div>
-                <span className="text-[10px] md:text-xs font-semibold uppercase tracking-wider text-amber-400/90 text-center leading-tight">
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-amber-400 text-center leading-tight drop-shadow-lg">
                   Civil<br />Engineering
                 </span>
               </motion.div>
@@ -134,36 +171,36 @@ export function InteractiveHeadshot() {
 
             {/* Software badge - right */}
             <motion.div
-              initial={{ opacity: 0, x: 20, y: 10 }}
+              initial={{ opacity: 0, x: 40, y: 10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
-              exit={{ opacity: 0, x: 20, y: 10 }}
+              exit={{ opacity: 0, x: 40, y: 10 }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 z-20"
+              className="absolute right-0 md:-right-8 top-1/2 -translate-y-1/2 z-20"
             >
               <motion.div
-                animate={{ y: [0, -6, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                 className="flex flex-col items-center gap-2"
               >
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-background/80 backdrop-blur-sm border border-cyan-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)]">
-                  <Monitor className="w-6 h-6 md:w-7 md:h-7 text-cyan-500" />
+                <div className="w-14 h-14 md:w-18 md:h-18 rounded-xl bg-background/95 backdrop-blur-md border-2 border-cyan-500/60 flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.5)]">
+                  <Monitor className="w-7 h-7 md:w-9 md:h-9 text-cyan-500" />
                 </div>
-                <span className="text-[10px] md:text-xs font-semibold uppercase tracking-wider text-cyan-400/90">
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-cyan-400 drop-shadow-lg">
                   Software
                 </span>
               </motion.div>
             </motion.div>
 
-            {/* Connecting arc/line */}
+            {/* Connecting arc/line - PROMINENT */}
             <motion.div
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               exit={{ scaleX: 0, opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[2px] origin-center z-10"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[4px] origin-center z-10"
               style={{
-                background: "linear-gradient(90deg, rgba(245,158,11,0.6) 0%, rgba(255,255,255,0.2) 50%, rgba(6,182,212,0.6) 100%)",
-                boxShadow: "0 0 20px rgba(255,255,255,0.3)",
+                background: "linear-gradient(90deg, rgba(245,158,11,1) 0%, rgba(255,255,255,0.5) 50%, rgba(6,182,212,1) 100%)",
+                boxShadow: "0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(249,115,22,0.4), 0 0 80px rgba(6,182,212,0.4)",
               }}
             />
           </>

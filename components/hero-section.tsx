@@ -4,11 +4,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { GradientWaves } from "./gradient-waves";
+import { FloatingIcons } from "./floating-icons";
 import { SplitText } from "@/components/ui/split-text";
 
 interface HeroSectionProps {
   eyebrow?: string;
-  title: string;
+  title: string | string[];
   description: React.ReactNode;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
@@ -34,6 +35,7 @@ export function HeroSection({
     >
       {/* Background Waves */}
       {showWaves && <GradientWaves />}
+      {showWaves && <FloatingIcons />}
 
       <div className="container-custom relative z-10">
         <motion.div
@@ -53,12 +55,26 @@ export function HeroSection({
             </motion.span>
           )}
 
-          <SplitText
-            text={title}
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-8 text-balance leading-[1.1]"
-            delay={0.15}
-            triggerOnScroll={false}
-          />
+          {Array.isArray(title) ? (
+            <div className="mb-8">
+              {title.map((line, i) => (
+                <SplitText
+                  key={i}
+                  text={line}
+                  className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground text-balance leading-tight block"
+                  delay={0.15 + i * 0.1}
+                  triggerOnScroll={false}
+                />
+              ))}
+            </div>
+          ) : (
+            <SplitText
+              text={title}
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-8 text-balance leading-tight"
+              delay={0.15}
+              triggerOnScroll={false}
+            />
+          )}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

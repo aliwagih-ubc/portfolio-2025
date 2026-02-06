@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import {
   HardHat,
   Briefcase,
@@ -20,10 +20,11 @@ const journeyStages = [
       "Started with boots on the ground. Learned what it means to build things that can't fail, like bridges and marine structures.",
     highlight: "Foundation in engineering discipline",
     color: "from-amber-500 to-orange-600",
-    glowColor: "rgba(245, 158, 11, 0.4)",
+    glowColor: "rgba(245, 158, 11, 0.5)",
     iconBg: "bg-amber-500/10",
     iconColor: "text-amber-500",
-    shadowColor: "shadow-amber-500/20",
+    borderColor: "border-amber-500/40",
+    dotColor: "bg-amber-500",
   },
   {
     icon: Briefcase,
@@ -33,10 +34,11 @@ const journeyStages = [
       "Managed multi-million dollar marine infrastructure projects. Learned stakeholder navigation, risk management, and the art of shipping under pressure.",
     highlight: "High-stakes delivery expertise",
     color: "from-orange-500 to-red-500",
-    glowColor: "rgba(249, 115, 22, 0.4)",
+    glowColor: "rgba(249, 115, 22, 0.5)",
     iconBg: "bg-orange-500/10",
     iconColor: "text-orange-500",
-    shadowColor: "shadow-orange-500/20",
+    borderColor: "border-orange-500/40",
+    dotColor: "bg-orange-500",
   },
   {
     icon: GraduationCap,
@@ -46,10 +48,11 @@ const journeyStages = [
       "Went back to fundamentals. Deep-diving into algorithms, systems design, and software craftsmanship while building real products on the side.",
     highlight: "Systems thinking & craft",
     color: "from-cyan-500 to-blue-500",
-    glowColor: "rgba(6, 182, 212, 0.4)",
+    glowColor: "rgba(6, 182, 212, 0.5)",
     iconBg: "bg-cyan-500/10",
     iconColor: "text-cyan-500",
-    shadowColor: "shadow-cyan-500/20",
+    borderColor: "border-cyan-500/40",
+    dotColor: "bg-cyan-500",
   },
   {
     icon: BrainCircuit,
@@ -59,215 +62,162 @@ const journeyStages = [
       "Building AI-powered tools for the industries I know. Bridging the gap between engineering reality and modern software capabilities.",
     highlight: "Bridging physical & digital",
     color: "from-violet-500 to-purple-600",
-    glowColor: "rgba(139, 92, 246, 0.4)",
+    glowColor: "rgba(139, 92, 246, 0.5)",
     iconBg: "bg-violet-500/10",
     iconColor: "text-violet-500",
-    shadowColor: "shadow-violet-500/20",
+    borderColor: "border-violet-500/40",
+    dotColor: "bg-violet-500",
   },
 ];
 
 export function VisualJourney() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
+
+  // Timeline line draw progress
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden">
+    <section
+      ref={containerRef}
+      className="py-20 md:py-32 relative overflow-hidden"
+    >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
 
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 container-custom">
         {/* Header */}
-        <div className="container-custom">
-          <SectionHeading
-            title="The Journey"
-            subtitle="From concrete and steel to code and cloud, each chapter built on the last."
+        <SectionHeading
+          title="The Journey"
+          subtitle="From concrete and steel to code and cloud, each chapter built on the last."
+          centered
+        />
+
+        {/* Vertical Timeline */}
+        <div className="mt-16 relative max-w-3xl mx-auto">
+          {/* Central timeline line (background) */}
+          <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-border/30" />
+
+          {/* Animated progress line */}
+          <motion.div
+            className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 w-[2px] bg-gradient-to-b from-amber-500 via-cyan-500 to-violet-500 origin-top"
+            style={{ height: lineHeight }}
           />
-        </div>
 
-        {/* Cards container */}
-        <div className="mt-12 flex justify-center items-center gap-4 px-4">
-          {journeyStages.map((stage, index) => {
-            const isActive = index === activeIndex;
+          {/* Timeline items */}
+          <div className="space-y-16 md:space-y-24">
+            {journeyStages.map((stage, index) => {
+              const isLeft = index % 2 === 0;
 
-            return (
-              <motion.div
-                key={stage.title}
-                className="relative cursor-pointer"
-                onClick={() => setActiveIndex(index)}
-                animate={{
-                  width: isActive ? 560 : 120,
-                  opacity: isActive ? 1 : 0.5,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 30,
-                }}
-              >
-                {/* Card glow effect */}
+              return (
                 <motion.div
-                  className="absolute -inset-3 rounded-3xl blur-2xl pointer-events-none"
-                  animate={{
-                    opacity: isActive ? 0.4 : 0,
-                  }}
-                  transition={{ duration: 0.4 }}
-                  style={{
-                    background: `radial-gradient(circle, ${stage.glowColor} 0%, transparent 70%)`,
-                  }}
-                />
-
-                {/* Card */}
-                <motion.div
+                  key={stage.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
                   className={cn(
-                    "relative h-[420px] rounded-2xl bg-card/90 backdrop-blur-md border overflow-hidden transition-colors duration-300",
-                    isActive ? "border-foreground/20" : "border-border/20 hover:border-border/40"
+                    "relative flex items-start gap-6 md:gap-12",
+                    "md:items-center",
+                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
                   )}
-                  animate={{
-                    boxShadow: isActive
-                      ? `0 30px 60px -15px ${stage.glowColor}`
-                      : "0 0 0 0 transparent",
-                  }}
-                  transition={{ duration: 0.4 }}
-                  whileHover={!isActive ? { scale: 1.02 } : {}}
                 >
-                  {/* Collapsed state - just icon and title */}
+                  {/* Timeline dot */}
+                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
+                    <motion.div
+                      className={cn(
+                        "w-4 h-4 rounded-full border-4 border-background",
+                        stage.dotColor
+                      )}
+                      whileInView={{
+                        scale: [1, 1.3, 1],
+                        boxShadow: [
+                          `0 0 0 0 ${stage.glowColor}`,
+                          `0 0 0 10px transparent`,
+                        ],
+                      }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
+
+                  {/* Spacer for mobile layout */}
+                  <div className="w-12 shrink-0 md:hidden" />
+
+                  {/* Card */}
                   <motion.div
-                    className="absolute inset-0 flex flex-col items-center justify-center p-4"
-                    animate={{
-                      opacity: isActive ? 0 : 1,
-                      pointerEvents: isActive ? "none" : "auto",
-                    }}
-                    transition={{ duration: 0.2 }}
+                    className={cn(
+                      "flex-1 max-w-md",
+                      isLeft ? "md:text-right md:pr-12" : "md:text-left md:pl-12"
+                    )}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
                     <div
                       className={cn(
-                        "w-12 h-12 rounded-xl flex items-center justify-center mb-4",
-                        stage.iconBg
+                        "p-6 rounded-2xl bg-card/80 backdrop-blur-sm border transition-all duration-300 hover:bg-card",
+                        stage.borderColor
                       )}
                     >
-                      <stage.icon className={cn("h-6 w-6", stage.iconColor)} />
-                    </div>
-                    <span
-                      className="text-xs font-medium text-muted-foreground text-center"
-                      style={{
-                        writingMode: "vertical-rl",
-                        textOrientation: "mixed",
-                      }}
-                    >
-                      {stage.title}
-                    </span>
-                  </motion.div>
-
-                  {/* Expanded state - full content */}
-                  <motion.div
-                    className="absolute inset-0 p-8 flex flex-col"
-                    animate={{
-                      opacity: isActive ? 1 : 0,
-                      pointerEvents: isActive ? "auto" : "none",
-                    }}
-                    transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }}
-                  >
-                    {/* Chapter number */}
-                    <span className="absolute top-6 right-6 text-7xl font-bold text-foreground/5 font-display">
-                      0{index + 1}
-                    </span>
-
-                    {/* Icon with pulse */}
-                    <motion.div
-                      className={cn(
-                        "w-16 h-16 rounded-xl flex items-center justify-center mb-6 relative",
-                        stage.iconBg
-                      )}
-                      animate={{
-                        scale: isActive ? [1, 1.05, 1] : 1,
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    >
-                      <stage.icon className={cn("h-8 w-8", stage.iconColor)} />
-
-                      {/* Pulse ring */}
-                      {isActive && (
-                        <motion.div
-                          className={cn("absolute inset-0 rounded-xl", stage.iconBg)}
-                          animate={{
-                            scale: [1, 1.5],
-                            opacity: [0.4, 0],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeOut",
-                          }}
-                        />
-                      )}
-                    </motion.div>
-
-                    {/* Period */}
-                    <span className="inline-flex self-start text-sm font-medium px-3 py-1.5 rounded-full mb-4 bg-foreground/10 text-foreground">
-                      {stage.period}
-                    </span>
-
-                    {/* Title */}
-                    <h3 className="font-display text-3xl font-bold text-foreground mb-4">
-                      {stage.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-base text-muted-foreground leading-relaxed flex-grow">
-                      {stage.description}
-                    </p>
-
-                    {/* Highlight */}
-                    <div className="flex items-center gap-3 pt-6 border-t border-border/30">
-                      <motion.span
+                      {/* Icon and period row */}
+                      <div
                         className={cn(
-                          "w-2 h-2 rounded-full bg-gradient-to-r",
-                          stage.color
+                          "flex items-center gap-4 mb-4",
+                          isLeft ? "md:flex-row-reverse" : "md:flex-row"
                         )}
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      />
-                      <span className="text-sm font-medium text-foreground/80">
-                        {stage.highlight}
-                      </span>
+                      >
+                        <div
+                          className={cn(
+                            "w-12 h-12 rounded-xl flex items-center justify-center",
+                            stage.iconBg
+                          )}
+                        >
+                          <stage.icon className={cn("h-6 w-6", stage.iconColor)} />
+                        </div>
+                        <span className="text-xs font-medium px-3 py-1 rounded-full bg-foreground/10 text-foreground/80">
+                          {stage.period}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="font-display text-xl font-bold text-foreground mb-2">
+                        {stage.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                        {stage.description}
+                      </p>
+
+                      {/* Highlight */}
+                      <div
+                        className={cn(
+                          "flex items-center gap-2 pt-4 border-t border-border/30",
+                          isLeft ? "md:flex-row-reverse" : "md:flex-row"
+                        )}
+                      >
+                        <span
+                          className={cn(
+                            "w-2 h-2 rounded-full bg-gradient-to-r",
+                            stage.color
+                          )}
+                        />
+                        <span className="text-xs font-medium text-foreground/70">
+                          {stage.highlight}
+                        </span>
+                      </div>
                     </div>
                   </motion.div>
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </div>
 
-        {/* Clickable dot indicators */}
-        <div className="mt-10 flex justify-center gap-4">
-          {journeyStages.map((stage, index) => (
-            <button
-              key={stage.title}
-              onClick={() => setActiveIndex(index)}
-              className="p-2 group"
-              aria-label={`View ${stage.title}`}
-            >
-              <motion.div
-                className={cn(
-                  "w-3 h-3 rounded-full",
-                  index === activeIndex
-                    ? "bg-foreground"
-                    : "bg-foreground/20 group-hover:bg-foreground/40"
-                )}
-                animate={{
-                  scale: index === activeIndex ? [1, 1.3, 1] : 1,
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: index === activeIndex ? Infinity : 0,
-                  ease: "easeInOut",
-                }}
-              />
-            </button>
-          ))}
+                  {/* Empty space on opposite side for desktop */}
+                  <div className="hidden md:block flex-1 max-w-md" />
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
