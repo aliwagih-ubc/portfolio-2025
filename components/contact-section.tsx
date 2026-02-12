@@ -24,7 +24,7 @@ export function ContactSection({ variant = "default" }: ContactSectionProps) {
               Have a project in mind or just want to chat?
             </p>
             <Link
-              href="mailto:contact@aliwagih.com"
+              href="mailto:awagih@outlook.com"
               className="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors font-medium"
             >
               Drop me a line
@@ -81,7 +81,7 @@ export function ContactSection({ variant = "default" }: ContactSectionProps) {
               className="flex flex-col sm:flex-row justify-center gap-4"
             >
               <Link
-                href="mailto:contact@aliwagih.com"
+                href="mailto:awagih@outlook.com"
                 className="inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-accent-foreground shadow-lg transition-all hover:bg-accent-hover hover:scale-[1.02] active:scale-[0.98] btn-glow-orange"
               >
                 <Mail className="mr-2 h-5 w-5" />

@@ -24,7 +24,7 @@ export default function Home() {
           </p>
         }
         primaryCta={{ label: "View Projects", href: "/projects" }}
-        secondaryCta={{ label: "Get in Touch", href: "mailto:contact@aliwagih.com" }}
+        secondaryCta={{ label: "Get in Touch", href: "mailto:awagih@outlook.com" }}
         status="Available for new projects"
         showWaves
       />

@@ -71,8 +71,13 @@ export function ContentTabs({ articles, videos }: ContentTabsProps) {
               ))}
             </div>
           ) : (
-            <div className="py-20 text-center text-muted-foreground border border-dashed border-border rounded-xl bg-card/30">
-              <p>No {activeTab} available yet.</p>
+            <div className="py-32 text-center px-8 text-muted-foreground border border-dashed border-border rounded-xl bg-card/30 space-y-2 w-fit">
+              <p className="font-medium text-foreground">Coming Soon</p>
+              <p className="text-sm">
+                {activeTab === "articles"
+                  ? "Articles are in the works. Check back soon."
+                  : "Videos are on the way. Subscribe to get notified."}
+              </p>
             </div>
           )}
         </motion.div>

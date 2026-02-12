@@ -21,9 +21,9 @@ function getCtaConfig(pathname: string) {
     case "/about":
       return { label: "See My Work", href: "/projects", isModal: false };
     case "/content":
-      return { label: "Get in Touch", href: "mailto:contact@aliwagih.com", isModal: false };
+      return { label: "Get in Touch", href: "mailto:awagih@outlook.com", isModal: false };
     default:
-      return { label: "Get in Touch", href: "mailto:contact@aliwagih.com", isModal: false };
+      return { label: "Get in Touch", href: "mailto:awagih@outlook.com", isModal: false };
   }
 }
 

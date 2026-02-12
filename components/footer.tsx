@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Youtube } from "lucide-react";
 
 const socialLinks = [
   {
-    href: "mailto:contact@aliwagih.com",
+    href: "mailto:awagih@outlook.com",
     icon: Mail,
     label: "Email",
   },
@@ -13,12 +13,12 @@ const socialLinks = [
     label: "LinkedIn",
   },
   {
-    href: "https://github.com/aliwagih",
+    href: "https://github.com/aliwagih-ubc",
     icon: Github,
     label: "GitHub",
   },
   {
-    href: "https://youtube.com/@aliwagih",
+    href: "https://www.youtube.com/@AfkarWorkshop",
     icon: Youtube,
     label: "YouTube",
   },
