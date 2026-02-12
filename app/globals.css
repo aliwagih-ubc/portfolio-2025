@@ -93,6 +93,15 @@
   }
 }
 
+/* Float animation for static project images (Option A) */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
 /* Base body styles */
 body {
   background: var(--color-background);

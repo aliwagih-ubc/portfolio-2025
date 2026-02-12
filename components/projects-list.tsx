@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Project, ProjectCategory } from "@/data/projects";
 import { ProjectTeaser } from "@/components/project-teaser";
 import { cn } from "@/lib/utils";
@@ -12,13 +12,32 @@ interface ProjectsListProps {
 const categories: ProjectCategory[] = [
   "All",
   "AI & Automation",
-  "Dashboards",
+  "Dashboards & Apps",
   "Product",
+  "Case Study",
 ];
 
 export function ProjectsList({ projects }: ProjectsListProps) {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
+  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  // On mount: read hash, auto-expand + scroll to the matching project
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+
+    const match = projects.find((p) => p.slug === hash);
+    if (!match) return;
+
+    // Ensure the right category filter is active so the item is visible
+    setActiveCategory("All");
+    setExpandedSlug(hash);
+
+    setTimeout(() => {
+      itemRefs.current[hash]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+  }, [projects]);
 
   const filteredProjects = projects.filter(
     (project) =>
@@ -55,13 +74,17 @@ export function ProjectsList({ projects }: ProjectsListProps) {
       {/* Projects List */}
       <div className="space-y-4">
         {filteredProjects.map((project, index) => (
-          <ProjectTeaser
+          <div
             key={project.slug}
-            project={project}
-            isExpanded={expandedSlug === project.slug}
-            onToggle={() => handleToggle(project.slug)}
-            index={index}
-          />
+            ref={(el) => { itemRefs.current[project.slug] = el; }}
+          >
+            <ProjectTeaser
+              project={project}
+              isExpanded={expandedSlug === project.slug}
+              onToggle={() => handleToggle(project.slug)}
+              index={index}
+            />
+          </div>
         ))}
       </div>
 

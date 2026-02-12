@@ -14,7 +14,7 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
     const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
     const [searchQuery, setSearchQuery] = useState("");
 
-    const categories: ProjectCategory[] = ["All", "AI & Automation", "Dashboards", "Product"];
+    const categories: ProjectCategory[] = ["All", "AI & Automation", "Dashboards & Apps", "Product", "Case Study"];
 
     const filteredProjects = projects.filter((project) => {
         const matchesCategory = activeCategory === "All" || project.category === activeCategory;

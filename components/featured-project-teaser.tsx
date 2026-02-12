@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Lock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Project } from "@/data/projects";
+import { ProjectMedia } from "@/components/project-media";
 import { cn } from "@/lib/utils";
 
 interface FeaturedProjectTeaserProps {
@@ -26,7 +27,7 @@ export function FeaturedProjectTeaser({
       className="group relative"
     >
       <Link
-        href="/projects"
+        href={`/projects#${project.slug}`}
         className={cn(
           "block p-6 md:p-8 rounded-xl transition-all duration-300",
           "bg-card/50 border border-border/50",
@@ -44,36 +45,32 @@ export function FeaturedProjectTeaser({
                 project.status === "Prototype" &&
                   "bg-amber-500/10 text-amber-400 border-amber-500/30",
                 project.status === "Concept" &&
-                  "bg-violet-500/10 text-violet-400 border-violet-500/30"
+                  "bg-violet-500/10 text-violet-400 border-violet-500/30",
+                project.status === "Shipped" &&
+                  "bg-green-500/10 text-green-400 border-green-500/30"
               )}
             >
               {project.status}
             </span>
-            {isRedacted && (
-              <Lock className="h-3.5 w-3.5 text-muted-foreground" />
-            )}
-          </div>
+            </div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             <h3 className="font-display text-lg md:text-xl font-bold text-foreground mb-1 group-hover:text-accent transition-colors">
               {project.displayTitle}
             </h3>
-            <p className="text-muted-foreground text-sm line-clamp-1">
+            <p className="text-muted-foreground text-sm line-clamp-2">
               {project.oneLiner}
             </p>
           </div>
 
-          {/* Tags */}
-          <div className="hidden md:flex items-center gap-2 shrink-0">
-            {project.tags.slice(0, 2).map((tag) => (
-              <span
-                key={tag}
-                className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded"
-              >
-                {tag}
-              </span>
-            ))}
+          {/* Thumbnail (desktop) */}
+          <div className="hidden md:block shrink-0">
+            <ProjectMedia
+              media={project.media}
+              className="w-20 h-14 rounded-lg"
+              sizes="80px"
+            />
           </div>
 
           {/* Arrow */}

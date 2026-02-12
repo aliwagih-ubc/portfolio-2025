@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown, Lock, ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import { Project } from "@/data/projects";
+import { ProjectMedia } from "@/components/project-media";
 import { cn } from "@/lib/utils";
 
 interface ProjectTeaserProps {
@@ -38,6 +39,15 @@ export function ProjectTeaser({
         )}
       >
         <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+          {/* Thumbnail */}
+          <div className="hidden md:block shrink-0">
+            <ProjectMedia
+              media={project.media}
+              className="w-16 h-16 rounded-lg"
+              sizes="64px"
+            />
+          </div>
+
           {/* Status & Category */}
           <div className="flex items-center gap-3 md:w-48 shrink-0">
             <span
@@ -55,33 +65,16 @@ export function ProjectTeaser({
             >
               {project.status}
             </span>
-            {isRedacted && (
-              <span className="flex items-center gap-1 text-[10px] uppercase font-bold text-muted-foreground tracking-wider">
-                <Lock className="h-3 w-3" />
-              </span>
-            )}
           </div>
 
           {/* Title & One-liner */}
           <div className="flex-1 min-w-0">
-            <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-1 group-hover:text-accent transition-colors truncate">
+            <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-1 group-hover:text-accent transition-colors">
               {project.displayTitle}
             </h3>
-            <p className="text-muted-foreground text-sm md:text-base line-clamp-1">
+            <p className="text-muted-foreground text-sm md:text-base line-clamp-2">
               {project.oneLiner}
             </p>
-          </div>
-
-          {/* Tags (desktop) */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="text-xs text-muted-foreground bg-muted/50 px-2.5 py-1 rounded-md"
-              >
-                {tag}
-              </span>
-            ))}
           </div>
 
           {/* Expand Icon */}
@@ -107,6 +100,12 @@ export function ProjectTeaser({
         className="overflow-hidden"
       >
         <div className="p-6 md:p-8 pt-0 bg-card border border-t-0 border-border rounded-b-xl">
+          {/* Expanded Media */}
+          <ProjectMedia
+            media={project.media}
+            className="aspect-video rounded-lg mb-6"
+          />
+
           <div className="pt-6 border-t border-border/50">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Problem */}
@@ -163,9 +162,7 @@ export function ProjectTeaser({
                   </a>
                 ) : (
                   <p className="text-sm text-muted-foreground">
-                    {isRedacted
-                      ? "Under NDA - details available upon request"
-                      : project.result || "In active development"}
+                    {project.result || "In active development"}
                   </p>
                 )}
               </div>

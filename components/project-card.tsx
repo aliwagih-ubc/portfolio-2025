@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Project } from "@/data/projects";
 import { TagPill } from "@/components/tag-pill";
+import { ProjectMedia } from "@/components/project-media";
 import { ArrowUpRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const isRedacted = project.redacted;
 
   return (
-    <div className="group relative flex flex-col justify-between rounded-xl border border-border/50 bg-card/50 p-6 transition-all hover:bg-card hover:border-border hover:glow-cyan-subtle">
+    <div className="group relative flex flex-col justify-between rounded-xl border border-border/50 bg-card/50 overflow-hidden transition-all hover:bg-card hover:border-border hover:glow-cyan-subtle">
+      <ProjectMedia
+        media={project.media}
+        className="aspect-video"
+      />
+      <div className="p-6">
       <div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
@@ -70,6 +76,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+      </div>
       </div>
     </div>
   );
