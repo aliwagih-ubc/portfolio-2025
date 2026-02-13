@@ -40,11 +40,6 @@ const coreValues = [
   },
 ];
 
-const techStack = {
-  frontend: ["Next.js", "React", "TypeScript", "TailwindCSS", "Framer Motion"],
-  backend: ["Node.js", "Python", "Supabase", "PostgreSQL", "Prisma"],
-  ai: ["OpenAI API", "LangChain", "RAG Patterns", "Vercel AI SDK"],
-};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -201,63 +196,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Tech Stack (Subtle Footer) */}
-      <section className="py-16 border-t border-border/40 bg-card/20">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-8 text-center">
-              Technical Stack
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
-                <h5 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
-                  Frontend
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                  {techStack.frontend.map((item) => (
-                    <span
-                      key={item}
-                      className="text-xs text-muted-foreground bg-muted/30 px-2.5 py-1 rounded-md border border-border/30"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h5 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
-                  Backend & Data
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                  {techStack.backend.map((item) => (
-                    <span
-                      key={item}
-                      className="text-xs text-muted-foreground bg-muted/30 px-2.5 py-1 rounded-md border border-border/30"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h5 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
-                  AI & Tools
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                  {techStack.ai.map((item) => (
-                    <span
-                      key={item}
-                      className="text-xs text-muted-foreground bg-muted/30 px-2.5 py-1 rounded-md border border-border/30"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA to Content */}
       <section className="py-16 md:py-20">
