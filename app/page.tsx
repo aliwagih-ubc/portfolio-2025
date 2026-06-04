@@ -15,17 +15,25 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <HeroSection
-        title="Field-tested builder bridging engineering reality with AI."
+        title="I build AI tools for the parts of business that still run on spreadsheets and gut feel."
         description={
-          <p>
-            I build AI-powered solutions for the physical world. With a
-            background delivering high-stakes marine infrastructure, I know that
-            software only matters if it works in the field.
-          </p>
+          <>
+            <p>
+              I spent years managing massive marine construction projects,
+              dealing with tight timelines, variable field conditions, and a
+              mountain of critical data trapped in messy spreadsheets.
+            </p>
+            <p>
+              Today, I build software for that exact world. I design operations
+              dashboards, streamline automation workflows, and engineer
+              practical AI tools that actually work where it counts, far beyond
+              a simple demo platform.
+            </p>
+          </>
         }
         primaryCta={{ label: "View Projects", href: "/projects" }}
         secondaryCta={{ label: "Get in Touch", href: "mailto:awagih@outlook.com" }}
-        status="Available for new projects"
+        status="Open to new projects"
         showWaves
       />
 
@@ -38,7 +46,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
             <SectionHeading
               title="Featured Projects"
-              subtitle="Products, prototypes, and concepts exploring the intersection of construction and AI."
+              subtitle="A few things I've built lately. Some shipped, some still in progress."
               className="mb-0"
             />
             <Link

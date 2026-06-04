@@ -7,12 +7,12 @@ export default function ProjectsPage() {
   return (
     <div className="flex flex-col">
       <HeroSection
-        eyebrow="My Work"
-        title="Solutions grounded in reality."
+        eyebrow="Projects"
+        title="Things I've built."
         description={
           <p>
-            A collection of products, prototypes, and concepts exploring the
-            intersection of construction/engineering operations and modern AI.
+            A mix of shipped products, working prototypes, and ideas I'm still
+            chasing. Mostly around construction and operations.
           </p>
         }
         compact

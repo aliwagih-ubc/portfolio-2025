@@ -21,7 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Ali Wagih | Engineer & AI Builder",
   description:
-    "Field-tested builder bridging engineering reality with AI. Civil engineer turned software engineer building solutions for the physical world.",
+    "I build AI tools for construction, operations, and finance. Civil engineer turned software engineer, building software for work that happens off the screen.",
 };
 
 export default function RootLayout({

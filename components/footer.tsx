@@ -45,7 +45,7 @@ export function Footer() {
               Ali Wagih
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Field-tested builder bridging engineering reality with AI.
+              I build AI tools for construction, operations, and finance.
             </p>
           </div>
 

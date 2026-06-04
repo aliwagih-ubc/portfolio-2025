@@ -36,110 +36,112 @@ export const projects: Project[] = [
     title: "Operations Intelligence Platform (IbexIQ)",
     displayTitle: "Operations Intelligence Platform",
     category: "Product",
-    status: "In progress",
+    status: "Shipped",
     oneLiner:
-      "Ops intelligence platform for portfolio oversight, project health checks, forecasting, and earned value reporting.",
+      "Ops platform that gives execs portfolio visibility and gives PMs one place for health checks, forecasting, and earned value reporting.",
     tags: ["Gemini", "Claude", "Next.js", "Amazon RDS", "Acumatica"],
-    featured: true,
+    featured: false,
     redacted: true,
     media: { type: "diagram", id: "ops-platform" },
     problem:
-      "Executives lack real-time portfolio visibility; PMs spend too much time on fragmented monthly reporting and forecasting.",
+      "Executives had no real-time view of the portfolio, and PMs lost days each month stitching reports together from systems that don't talk to each other.",
     solution:
-      "Centralizes project and org data (SharePoint, Acumatica CRM, Dayforce HR), enabling drill-down dashboards and a PM module for monthly health checks, cost forecasting, and EVM.",
+      "Pulls project and org data from SharePoint, Acumatica CRM, and Dayforce into one place, with drill-down dashboards and a PM module for monthly health checks, cost forecasting, and EVM.",
     result:
-      "In-user testing with internal teams.",
+      "Live with internal teams. Runs the monthly project health checks, cost forecasting, and earned value reporting it was built for.",
   },
   {
-    slug: "home-builder-estimating-assistant",
-    title: "Home Builder Estimating Assistant",
-    displayTitle: "Home Builder Estimating Assistant",
+    slug: "finops-ai",
+    title: "Opendoor FinOps AI Agents",
+    displayTitle: "Opendoor FinOps AI Agents",
     category: "AI & Automation",
-    status: "Concept",
-    oneLiner:
-      "AI estimating assistant that drafts accurate home-build cost estimates from templates, history, and local comps.",
-    tags: ["RAG", "Gemini", "Claude", "Supabase", "Web Scraping", "Excel Automation"],
-    featured: false,
-    media: { type: "image", src: "/projects/home-builder-estimating-assistant/cover.png", alt: "Home Builder Estimating Assistant — data flow diagram" },
-    problem:
-      "Home builder loses leads because estimates take too long and accuracy varies with experience and workload.",
-    solution:
-      "Ingests existing Excel templates and historical job costs, enriches with nearby comp data, and uses an LLM + RAG layer to generate a draft estimate with line items and assumptions for review.",
-    result:
-      "Concept defined; next step is a prototype with mocked cost history and template ingestion.",
-  },
-  {
-    slug: "home-owner-client-dashboard",
-    title: "Home Owner Client Dashboard",
-    displayTitle: "Home Owner Client Dashboard",
-    category: "Dashboards & Apps",
-    status: "Concept",
-    oneLiner:
-      "Client dashboard for homeowners to track build progress, schedule, photos, and costs in one place.",
-    tags: ["Next.js", "TypeScript", "Sage Construction API", "Supabase", "File Storage/CDN"],
-    featured: false,
-    redacted: true,
-    media: { type: "image", src: "/projects/home-owner-client-dashboard/cover.png", alt: "Home Owner Client Dashboard — concept wireframe" },
-    problem:
-      "Homeowners constantly ask for updates; builders waste time on repetitive status back-and-forth and sharing photos across channels.",
-    solution:
-      "A lightweight client-facing portal where builders post periodic updates (milestones, schedule shifts, photos/media) and costs sync in via Sage Construction Management APIs.",
-    result:
-      "Concept defined. Next task is to create a prototype with mocked data.",
-  },
-  {
-    slug: "gohelpme",
-    title: "GoHelpMe",
-    displayTitle: "GoHelpMe",
-    category: "Dashboards & Apps",
     status: "Prototype",
     oneLiner:
-      "GoFundMe-style platform where people pledge volunteer hours (not money) to campaigns.",
+      "Agentic finance automation. Four AI agents that code journal entries, reconcile accounts, write variance narratives, and answer policy questions.",
+    tags: ["Claude", "FastAPI", "Next.js", "TypeScript", "Agentic Workflows"],
+    featured: false,
+    link: "https://finops-ai-dashboard.vercel.app/overview",
+    media: { type: "image", src: "/projects/finops-ai/cover.png", alt: "Opendoor FinOps AI Agents — finance automation dashboard" },
+    problem:
+      "Finance teams burn hours every close on the same repetitive work: coding transactions, matching invoices, explaining variances, and answering the same policy questions.",
+    solution:
+      "Four agents split the busywork. A classifier codes journal entries against a 57-account chart, a reconciliation agent matches bank to GL and runs three-way invoice matches, a flux agent writes variance narratives, and a policy agent answers finance questions over live data.",
+    result:
+      "Prototype built to show what agentic accounting can look like. Live dashboard with a build journey and an adoption guide.",
+  },
+  {
+    slug: "superintendent",
+    title: "Superintendent",
+    displayTitle: "Superintendent",
+    category: "Product",
+    status: "In progress",
+    oneLiner:
+      "An AI project manager that flips the script. Coding agents ask it for clarification through Linear instead of stalling and waiting on you.",
+    tags: ["TypeScript", "Node 20", "Ink", "Linear SDK", "Anthropic SDK", "SQLite", "Next.js"],
+    featured: true,
+    media: { type: "placeholder" },
+    problem:
+      "Coding agents stall on ambiguous tickets, so people end up babysitting them instead of doing real work.",
+    solution:
+      "A daemon that refines Linear tickets by asking clarifying questions, dispatches work across Claude Code, Codex, and Gemini, and escalates only when it's genuinely stuck. It tracks cost per ticket, runs an automated PR self-review loop, and ships a Next.js dashboard for observability. Because refined tickets and plans live in Linear, executives get one place to query for project context.",
+    result:
+      "In active development.",
+  },
+  {
+    slug: "opendoor-help-center",
+    title: "Opendoor Help Center",
+    displayTitle: "Opendoor Help Center",
+    category: "Product",
+    status: "Prototype",
+    oneLiner:
+      "A rebuilt help center concept for Opendoor with fast search, guided flows, and a walkthrough of how it was made.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Design System"],
+    featured: true,
+    link: "https://help-center-20.vercel.app/",
+    media: { type: "image", src: "/projects/opendoor-help-center/cover.png", alt: "Opendoor Help Center — search and AI assistant" },
+    problem:
+      "Support docs are easy to write and hard to navigate. People give up before they find the answer.",
+    solution:
+      "A help center built on Opendoor's design system: searchable articles, guided multi-step flows for common tasks, and a build-journey page that documents the design and engineering decisions behind it.",
+    result:
+      "Prototype deployed, with a build-journey walkthrough alongside it.",
+  },
+  {
+    slug: "the-help-club",
+    title: "The Help Club",
+    displayTitle: "The Help Club",
+    category: "Dashboards & Apps",
+    status: "Shipped",
+    oneLiner:
+      "A GoFundMe for time. People pledge volunteer hours instead of money to causes they care about.",
     tags: ["Next.js 15", "Supabase", "TypeScript", "Tailwind CSS", "Claude AI"],
     featured: true,
+    link: "https://thehelp.club",
     media: { type: "diagram", id: "gohelpme" },
     problem:
-      "Crowdfunding excludes people who can't donate cash but can contribute time and skills; volunteer coordination is messy.",
+      "Crowdfunding leaves out people who can give time and skills but not cash, and coordinating volunteers by hand is messy.",
     solution:
-      "Campaigns raise volunteer hours with skill matching, hour-goal tracking, approvals, search/filters, and OAuth login.",
+      "Campaigns raise volunteer hours instead of dollars, with skill matching, hour goals, approvals, search and filters, and OAuth login.",
     result:
-      "MVP backbone built (DB schema + auth + core flows). Frontend components in progress.",
+      "Live at thehelp.club.",
   },
   {
     slug: "cpsc-436c-cloud-computing",
     title: "CPSC 436C - Cloud Computing: A Case Study",
     displayTitle: "Cloud Computing: A Case Study",
     category: "Case Study",
-    status: "In progress",
+    status: "Shipped",
     oneLiner:
-      "Experiment completing a cloud computing course using custom AI agents with full transparency and logging.",
+      "An experiment in completing a cloud computing course with custom AI agents, fully logged and traceable.",
     tags: ["Custom AI Agents", "Claude", "Cursor", "Google Cloud"],
     featured: false,
     media: { type: "image", src: "/projects/cpsc-436c-cloud-computing/cover.png", alt: "Cloud Computing Case Study — GenAI interaction log" },
     problem:
-      "AI can meaningfully contribute to coursework, but most workflows are opaque and lack accountability and integrity controls.",
+      "AI can do real coursework, but most of the time you can't see how it got there, which makes accountability and academic integrity hard to defend.",
     solution:
-      "Built a structured AI-collaboration framework (multiple specialized agents) that logs every interaction and ties work to evidence and git commits, backed by a CCT methodology and an ethics ledger.",
+      "A team of specialized AI agents that logs every interaction and ties each piece of work to evidence and a git commit, backed by a defined methodology and an ethics ledger.",
     result:
-      "Custom AI agents and their interaction framework are built and operational, with end-to-end logging and commit-level traceability in place. Capstone in development: an engineering knowledge preservation system that extracts key data from large documents before cloud storage deletion.",
-  },
-  {
-    slug: "ai-content-pipeline",
-    title: "Arabic AI Content Pipeline",
-    displayTitle: "Arabic AI Content Pipeline",
-    category: "AI & Automation",
-    status: "Shipped",
-    oneLiner:
-      "Automated pipeline that discovers AI trends and generates Egyptian Arabic scripts end-to-end.",
-    tags: ["Gemini AI", "GitHub Actions", "Notion API", "YouTube Data API", "Google Docs API"],
-    featured: false,
-    media: { type: "diagram", id: "arabic-pipeline" },
-    problem:
-      "Producing consistent, high-quality AI content in Egyptian Arabic is time-heavy: trend tracking, scripting, translation, and pipeline management.",
-    solution:
-      "Zero-infra automation that monitors AI sources and creators, scores opportunities with Gemini, and generates English scripts then localizes to Egyptian Arabic (RTL Google Docs), orchestrated via GitHub Actions and managed through Notion workflows with notifications.",
-    result:
-      "Fully operational system (trend scouting, creator monitoring/discovery, script writing, Arabic localization, and on-demand agent). Running on schedules and actively used for a 2–3x/week publishing cadence target within low/no-cost limits.",
+      "Finished the course with an A+. The agents and logging framework are built and operational, with commit-level traceability throughout.",
   },
   {
     slug: "arabic-video-script-generator",
@@ -148,16 +150,71 @@ export const projects: Project[] = [
     category: "AI & Automation",
     status: "Shipped",
     oneLiner:
-      "Chrome extension that turns multiple YouTube videos into an Egyptian Arabic script via AI synthesis.",
+      "A Chrome extension that turns a stack of YouTube videos into one Egyptian Arabic script.",
     tags: ["Gemini", "Claude", "Google Docs API", "Notion API", "Chrome Extension"],
-    featured: true,
+    featured: false,
     media: { type: "image", src: "/projects/arabic-video-script-generator/cover.png", alt: "Arabic Video Script Generator — extension UI on YouTube" },
     problem:
-      "Creating Egyptian Arabic scripts from multiple English videos takes hours: research, synthesis, dialect translation, b-roll, and formatting.",
+      "Turning several English videos into an Egyptian Arabic script takes hours of research, synthesis, dialect translation, and formatting.",
     solution:
-      "Browser-native workflow: queue videos on YouTube, fetch transcripts, synthesize across 5–10 sources, generate a 10–12 min Egyptian Arabic script, output a properly formatted Google Doc, and log metadata to Notion.",
+      "Queue videos right on YouTube, pull their transcripts, synthesize across five to ten sources, and generate a 10 to 12 minute Egyptian Arabic script straight into a formatted Google Doc, with metadata logged to Notion.",
     result:
-      "End-to-end working extension (collection → transcript → generation → Google Doc → Notion) with OAuth, retries/backoff, and token expiry handling. Cuts script creation from ~3–4 hours to ~2–3 minutes.",
+      "Works end to end, from collecting videos to the finished Google Doc. Cuts script writing from three or four hours down to a couple of minutes.",
+  },
+  {
+    slug: "ai-content-pipeline",
+    title: "Arabic AI Content Pipeline",
+    displayTitle: "Arabic AI Content Pipeline",
+    category: "AI & Automation",
+    status: "Shipped",
+    oneLiner:
+      "An automated pipeline that spots AI trends and writes Egyptian Arabic scripts from start to finish.",
+    tags: ["Gemini AI", "GitHub Actions", "Notion API", "YouTube Data API", "Google Docs API"],
+    featured: false,
+    media: { type: "diagram", id: "arabic-pipeline" },
+    problem:
+      "Putting out consistent AI content in Egyptian Arabic eats time: tracking trends, scripting, translating, and keeping the pipeline running.",
+    solution:
+      "Zero-infrastructure automation that watches AI sources and creators, scores story ideas with Gemini, writes scripts in English, then localizes them to Egyptian Arabic in RTL Google Docs. Orchestrated with GitHub Actions and managed through Notion.",
+    result:
+      "Fully running, from trend scouting to script writing to Arabic localization. On a schedule, aiming for two to three videos a week within free-tier limits.",
+  },
+  {
+    slug: "home-builder-estimating-assistant",
+    title: "Home Builder Estimating Assistant",
+    displayTitle: "Home Builder Estimating Assistant",
+    category: "AI & Automation",
+    status: "Prototype",
+    oneLiner:
+      "An AI estimating assistant that drafts home-build cost estimates from templates, past jobs, and local comps.",
+    tags: ["RAG", "Gemini", "Claude", "Supabase", "Web Scraping", "Excel Automation"],
+    featured: false,
+    media: { type: "image", src: "/projects/home-builder-estimating-assistant/cover.png", alt: "Home Builder Estimating Assistant — data flow diagram" },
+    problem:
+      "Builders lose leads because estimates take too long, and accuracy swings with whoever is doing them and how busy they are.",
+    solution:
+      "Reads existing Excel templates and historical job costs, pulls in nearby comp data, and uses an LLM with a RAG layer to draft an estimate with line items and assumptions to review.",
+    result:
+      "Prototype in progress with mocked cost history and template ingestion.",
+  },
+  {
+    slug: "home-owner-client-dashboard",
+    title: "Home Owner Client Dashboard",
+    displayTitle: "Home Owner Client Dashboard",
+    category: "Dashboards & Apps",
+    status: "Prototype",
+    oneLiner:
+      "A dashboard where homeowners can track build progress, schedule, photos, and costs in one place.",
+    tags: ["Next.js", "TypeScript", "Sage Construction API", "Supabase", "File Storage/CDN"],
+    featured: false,
+    redacted: true,
+    media: { type: "image", src: "/projects/home-owner-client-dashboard/cover.png", alt: "Home Owner Client Dashboard — concept wireframe" },
+    problem:
+      "Homeowners keep asking for updates, and builders waste time repeating themselves and scattering photos across texts and email.",
+    solution:
+      "A simple client portal where builders post milestones, schedule changes, and photos, while costs sync in from Sage Construction Management.",
+    result:
+      "Prototype in progress with mocked data.",
   },
 ];
 

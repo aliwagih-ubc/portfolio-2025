@@ -58,7 +58,7 @@ export function ContactSection({ variant = "default" }: ContactSectionProps) {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-foreground"
             >
-              Let&apos;s talk about your project
+              Have something you want built?
             </motion.h2>
 
             <motion.p
@@ -68,9 +68,9 @@ export function ContactSection({ variant = "default" }: ContactSectionProps) {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
             >
-              Whether you&apos;re building something new in construction tech or need
-              a technical partner who understands the domain&mdash;I&apos;d like to hear
-              about it.
+              If you&apos;re working on something in construction, operations, or
+              finance, I&apos;d like to hear about it. Especially if you need someone
+              who gets the domain as well as the code.
             </motion.p>
 
             <motion.div

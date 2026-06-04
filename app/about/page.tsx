@@ -10,33 +10,33 @@ import { ArrowRight, Heart, Target, Zap, Shield, Eye, Lightbulb } from "lucide-r
 const coreValues = [
   {
     icon: Heart,
-    title: "Empathy for the end-user",
-    description: "Software is for people. I build with their reality in mind.",
+    title: "Software is for people",
+    description: "Every tool gets used by a real person having a real day. I build for them, not for the demo.",
   },
   {
     icon: Eye,
-    title: "Clarity over cleverness",
-    description: "Simple, understandable solutions beat complex ones.",
+    title: "Plain beats clever",
+    description: "A simple thing that works beats a clever thing nobody understands. I reach for the boring solution first.",
   },
   {
     icon: Target,
-    title: "Ownership of outcomes",
-    description: "I care about results, not just shipping features.",
+    title: "I own the outcome",
+    description: "Shipping a feature isn't the point. I care whether it actually made someone's job easier.",
   },
   {
     icon: Zap,
-    title: "Bias for action",
-    description: "Start small, iterate fast, learn from what's real.",
+    title: "Start small, learn fast",
+    description: "I'd rather put a rough version in front of someone this week than a perfect one next quarter.",
   },
   {
     icon: Lightbulb,
-    title: "Rigorous simplicity",
-    description: "The simplest solution that works is often the best.",
+    title: "Cut what you can",
+    description: "Most of building well is deciding what not to build. I try to do less, better.",
   },
   {
     icon: Shield,
-    title: "Reliability matters",
-    description: "From bridges to code—failure isn't an option.",
+    title: "It has to hold up",
+    description: "I came from work where failure had consequences. I don't ship things I wouldn't trust.",
   },
 ];
 
@@ -62,13 +62,13 @@ export default function About() {
   return (
     <div className="flex flex-col">
       <HeroSection
-        eyebrow="My Journey"
-        title={["From concrete and steel", "to code and cloud."]}
+        eyebrow="About me"
+        title={["I left construction project management", "to build software tools for the industries I know best."]}
         description={
           <p>
-            I spent years managing complex marine construction projects. Now, I
-            use that experience to build software that actually solves the
-            problems I saw on site every day.
+            For years I managed marine construction projects. Now I build
+            software for the same kind of work, and I still think like someone
+            who has to answer for what gets delivered.
           </p>
         }
         compact
@@ -81,18 +81,19 @@ export default function About() {
             <InteractiveHeadshot />
             <div className="space-y-6">
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
-                Two worlds, one perspective
+                An unusual path to software
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                My path is not typical for a software builder. I started in civil
-                engineering, moved into project management on complex marine
-                infrastructure, and then pivoted to computer science.
+                Most software people came up through computer science. I came up
+                through civil engineering, then years of project management on
+                marine infrastructure, and only then computer science.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Each chapter taught me something essential: engineering gave me
-                discipline and respect for constraints; PM taught me stakeholder
-                navigation and delivery under pressure; CS gave me the tools to
-                build solutions at scale.
+                Each step left me with something. Engineering taught me to
+                respect constraints. Project management taught me how to deliver
+                when a dozen people and a deadline are involved. Computer science
+                gave me the tools to build the fixes I used to only complain
+                about.
               </p>
             </div>
           </div>
@@ -115,17 +116,16 @@ export default function About() {
               </h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  My career started in civil engineering, where production
-                  meant delivering tangible infrastructure in harsh marine
-                  environments. As a Project Manager, I dealt with multi-million
-                  dollar budgets, complex stakeholder negotiations, and the
-                  constant pressure of tide charts and weather windows.
+                  I started in civil engineering, building real things in rough
+                  marine conditions. As a project manager I handled the budgets,
+                  the negotiations, and the parts nobody warns you about, like
+                  planning concrete pours around tide charts and weather windows.
                 </p>
                 <p>
-                  I saw first-hand how much friction exists in construction
-                  workflows. Data is siloed, decisions are made on stale
-                  information, and brilliant engineers spend hours copy-pasting
-                  spreadsheet rows.
+                  What stuck with me was how much time got wasted. Data lived in
+                  ten different places, decisions got made on last week's
+                  numbers, and good engineers spent their afternoons
+                  copy-pasting between spreadsheets.
                 </p>
               </div>
             </motion.div>
@@ -142,16 +142,16 @@ export default function About() {
               </h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  I realized that the biggest levers for improvement were not
-                  better concrete mixes, but better information systems. I went
-                  back to school for Computer Science to build the tools I
-                  wished I had.
+                  It became obvious the biggest improvements wouldn't come from
+                  better materials. They'd come from better information. So I
+                  went back to school for computer science to build the tools I
+                  kept wishing I had.
                 </p>
                 <p>
-                  Today, I am bridging the gap. I speak the language of the job
-                  site and the language of the pull request. I build software
-                  that respects deep domain constraints while leveraging modern
-                  AI to automate the drudgery.
+                  That's what I do now. I can sit in a site meeting and a code
+                  review on the same day, and I build software that takes the
+                  domain seriously instead of treating it as an afterthought,
+                  using AI to kill the busywork rather than to look impressive.
                 </p>
               </div>
             </motion.div>
@@ -163,8 +163,8 @@ export default function About() {
       <section className="py-24 md:py-32">
         <div className="container-custom">
           <SectionHeading
-            title="Core Values"
-            subtitle="The principles that guide how I build."
+            title="What I care about"
+            subtitle="A few things I've come to believe after building in two very different worlds."
             centered
           />
 
@@ -207,13 +207,13 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-muted-foreground mb-6">
-              Curious about what I am thinking about?
+              Curious what I'm thinking about lately?
             </p>
             <Link
               href="/content"
               className="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors font-medium"
             >
-              Check out my content
+              See my writing and videos
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

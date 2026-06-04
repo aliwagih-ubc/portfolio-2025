@@ -7,23 +7,23 @@ import { SectionHeading } from "./section-heading";
 const pillars = [
   {
     icon: Compass,
-    title: "Empathy-First Discovery",
+    title: "Start with the real problem",
     description:
-      "I map the real pain, understand constraints, and ensure we solve the right problem for people in the field.",
+      "Before I build anything, I figure out where the actual pain is. Most of the time it isn't where people first point.",
     accent: "border-t-cyan-500",
   },
   {
     icon: Hammer,
-    title: "Build the Right Thing",
+    title: "Build the smallest useful thing",
     description:
-      "I focus on the smallest useful version. Rapid prototyping and tight loops ensure adoption and prevent wasted effort.",
+      "I ship a thin version fast, put it in front of real users, and let what they actually do decide what comes next.",
     accent: "border-t-orange-500",
   },
   {
     icon: ShieldCheck,
-    title: "Ship with Reliability",
+    title: "Make it hold up",
     description:
-      "Civil engineering taught me failure isn't an option. I bring that rigour to software, handling edge cases and ensuring stability.",
+      "On a job site, things that fail cost real money and time. I bring that same caution to code: handle the edge cases, expect the weird inputs.",
     accent: "border-t-violet-500",
   },
 ];
@@ -56,7 +56,7 @@ export function HowIWork() {
       <div className="container-custom relative z-10">
         <SectionHeading
           title="How I Work"
-          subtitle="Software success isn't just code. It's understanding the reality of where that code&nbsp;lives."
+          subtitle="Good software isn't just code. It's knowing the job it has to do and where it has to&nbsp;survive."
         />
 
         <motion.div

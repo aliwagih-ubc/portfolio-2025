@@ -17,8 +17,8 @@ const journeyStages = [
     title: "Civil Engineering",
     period: "2019-2022",
     description:
-      "Started with boots on the ground. Learned what it means to build things that can't fail, like bridges and marine structures.",
-    highlight: "Foundation in engineering discipline",
+      "My first work was on real infrastructure: bridges and marine structures, where a mistake isn't a bug, it's a safety report. It taught me to respect constraints.",
+    highlight: "Where I learned to respect constraints",
     color: "from-amber-500 to-orange-600",
     glowColor: "rgba(245, 158, 11, 0.5)",
     iconBg: "bg-amber-500/10",
@@ -31,8 +31,8 @@ const journeyStages = [
     title: "Consulting PM",
     period: "2022-Present",
     description:
-      "Managed multi-million dollar marine infrastructure projects. Learned stakeholder navigation, risk management, and the art of shipping under pressure.",
-    highlight: "High-stakes delivery expertise",
+      "Ran marine construction projects worth millions: budgets, schedules, contractors, and the weather. I learned how work actually gets delivered when a lot is on the line.",
+    highlight: "Delivering when it counts",
     color: "from-orange-500 to-red-500",
     glowColor: "rgba(249, 115, 22, 0.5)",
     iconBg: "bg-orange-500/10",
@@ -45,8 +45,8 @@ const journeyStages = [
     title: "CS Degree",
     period: "2023-2026",
     description:
-      "Went back to fundamentals. Deep-diving into algorithms, systems design, and software craftsmanship while building real products on the side.",
-    highlight: "Systems thinking & craft",
+      "Went back to school for computer science to build the tools I kept wishing existed on site. Algorithms and systems by day, shipping side projects by night.",
+    highlight: "Learning to build properly",
     color: "from-cyan-500 to-blue-500",
     glowColor: "rgba(6, 182, 212, 0.5)",
     iconBg: "bg-cyan-500/10",
@@ -59,8 +59,8 @@ const journeyStages = [
     title: "AI Solutions",
     period: "2025-Present",
     description:
-      "Building AI-powered tools for the industries I know. Bridging the gap between engineering reality and modern software capabilities.",
-    highlight: "Bridging physical & digital",
+      "Now I build practical AI tools for the industries I know best, focusing on construction and complex operations. The goal is to design straightforward software that works seamlessly for the people who do not have time to fight with software.",
+    highlight: "What I do now",
     color: "from-violet-500 to-purple-600",
     glowColor: "rgba(139, 92, 246, 0.5)",
     iconBg: "bg-violet-500/10",
@@ -92,7 +92,7 @@ export function VisualJourney() {
         {/* Header */}
         <SectionHeading
           title="The Journey"
-          subtitle="From concrete and steel to code and cloud, each chapter built on the last."
+          subtitle="How I got from civil engineering to building software."
           centered
         />
 

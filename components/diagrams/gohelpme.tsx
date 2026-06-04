@@ -57,7 +57,7 @@ export function GoHelpMeDiagram() {
         <line x1="0" y1="46" x2="800" y2="46" stroke="#e5e7eb" strokeWidth="1" />
         {/* Logo */}
         <text x="22" y="30" fill={ORANGE} fontSize="15" fontFamily="system-ui">♥</text>
-        <text x="42" y="30" fill={ORANGE} fontSize="13" fontFamily="system-ui" fontWeight="700">GoHelpMe</text>
+        <text x="42" y="30" fill={ORANGE} fontSize="13" fontFamily="system-ui" fontWeight="700">The Help Club</text>
         {/* Nav */}
         <text x="222" y="29" fill="#374151" fontSize="10" fontFamily="system-ui">Browse Campaigns</text>
         <text x="344" y="29" fill="#374151" fontSize="10" fontFamily="system-ui">How It Works</text>
