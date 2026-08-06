@@ -59,7 +59,7 @@ export const projects: Project[] = [
     oneLiner:
       "Agentic finance automation. Four AI agents that code journal entries, reconcile accounts, write variance narratives, and answer policy questions.",
     tags: ["Claude", "FastAPI", "Next.js", "TypeScript", "Agentic Workflows"],
-    featured: false,
+    featured: true,
     link: "https://finops-ai-dashboard.vercel.app/overview",
     media: { type: "image", src: "/projects/finops-ai/cover.png", alt: "Opendoor FinOps AI Agents — finance automation dashboard" },
     problem:

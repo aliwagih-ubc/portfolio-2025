@@ -1,8 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, ChevronDown, Lock } from "lucide-react";
 import { Project, ProjectCategory } from "@/data/projects";
-import { ProjectTeaser } from "@/components/project-teaser";
+import { ProjectMedia } from "@/components/project-media";
+import { FileChip } from "@/components/canvas/canvas";
+import { TerminalMock } from "@/components/featured-panels";
 import { cn } from "@/lib/utils";
 
 interface ProjectsListProps {
@@ -17,6 +21,126 @@ const categories: ProjectCategory[] = [
   "Case Study",
 ];
 
+const STATUS_TONES: Record<Project["status"], string> = {
+  Shipped: "bg-green text-ink",
+  "In progress": "bg-cyan text-ink",
+  Prototype: "bg-yellow text-ink",
+  Concept: "bg-muted text-ink",
+};
+
+function ProjectCard({
+  project,
+  isExpanded,
+  onToggle,
+}: {
+  project: Project;
+  isExpanded: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div>
+      {/* Folder tab */}
+      <div className="panel-tab inline-flex items-center gap-3 bg-muted font-mono uppercase text-xs md:text-sm px-4 pr-12 py-2.5 text-ink">
+        <span className={cn("px-2 py-0.5", STATUS_TONES[project.status])}>
+          ● {project.status}
+        </span>
+        {project.category}
+        {project.redacted && (
+          <span className="inline-flex items-center gap-1 text-pink">
+            <Lock className="size-3.5" /> NDA
+          </span>
+        )}
+      </div>
+
+      {/* Body */}
+      <div className="bg-white border border-ink/10 shadow-[0_8px_28px_rgba(17,18,18,0.08)]">
+        <div className="relative">
+          <FileChip label="image.jpg" className="absolute top-3 right-3 z-10" />
+          {project.media.type === "placeholder" ? (
+            <TerminalMock />
+          ) : (
+            <ProjectMedia media={project.media} className="aspect-[16/9]" />
+          )}
+        </div>
+        <div className="p-6 md:p-7">
+          <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-ink">
+            {project.displayTitle}
+          </h3>
+          <p className="mt-3 text-ink/75 leading-relaxed">{project.oneLiner}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="folder-chip bg-muted font-mono uppercase text-xs px-3 py-1.5 text-ink"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-5">
+            {(project.problem || project.solution || project.result) && (
+              <button
+                onClick={onToggle}
+                className="inline-flex items-center gap-2 font-mono uppercase text-sm text-ink border-b-2 border-ink pb-1 hover:text-muted-foreground hover:border-muted-foreground transition-colors"
+                aria-expanded={isExpanded}
+              >
+                Case file
+                <ChevronDown
+                  className={cn("size-4 transition-transform", isExpanded && "rotate-180")}
+                />
+              </button>
+            )}
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono uppercase text-sm text-ink border-b-2 border-cyan pb-1 hover:bg-cyan-pastel transition-colors"
+              >
+                Visit live <ArrowUpRight className="size-4" />
+              </a>
+            )}
+          </div>
+
+          <AnimatePresence initial={false}>
+            {isExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.21, 0.6, 0.35, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="pt-6 grid gap-4">
+                  {project.problem && (
+                    <div className="bg-cyan-pastel px-5 py-4">
+                      <p className="font-mono uppercase text-xs text-ink/60 mb-1.5">Problem</p>
+                      <p className="text-sm text-ink/85 leading-relaxed">{project.problem}</p>
+                    </div>
+                  )}
+                  {project.solution && (
+                    <div className="bg-yellow-pastel px-5 py-4">
+                      <p className="font-mono uppercase text-xs text-ink/60 mb-1.5">Solution</p>
+                      <p className="text-sm text-ink/85 leading-relaxed">{project.solution}</p>
+                    </div>
+                  )}
+                  {project.result && (
+                    <div className="bg-green-pastel px-5 py-4">
+                      <p className="font-mono uppercase text-xs text-ink/60 mb-1.5">Result</p>
+                      <p className="text-sm text-ink/85 leading-relaxed">{project.result}</p>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectsList({ projects }: ProjectsListProps) {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
@@ -30,28 +154,22 @@ export function ProjectsList({ projects }: ProjectsListProps) {
     const match = projects.find((p) => p.slug === hash);
     if (!match) return;
 
-    // Ensure the right category filter is active so the item is visible
-    setActiveCategory("All");
-    setExpandedSlug(hash);
-
-    setTimeout(() => {
+    const timer = setTimeout(() => {
+      setActiveCategory("All");
+      setExpandedSlug(hash);
       itemRefs.current[hash]?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 150);
+    return () => clearTimeout(timer);
   }, [projects]);
 
   const filteredProjects = projects.filter(
-    (project) =>
-      activeCategory === "All" || project.category === activeCategory
+    (project) => activeCategory === "All" || project.category === activeCategory
   );
 
-  const handleToggle = (slug: string) => {
-    setExpandedSlug(expandedSlug === slug ? null : slug);
-  };
-
   return (
-    <div className="space-y-8">
-      {/* Category Filter */}
-      <div className="flex flex-wrap gap-2">
+    <div className="space-y-10">
+      {/* Category filter */}
+      <div className="flex flex-wrap gap-2.5">
         {categories.map((category) => (
           <button
             key={category}
@@ -60,10 +178,10 @@ export function ProjectsList({ projects }: ProjectsListProps) {
               setExpandedSlug(null);
             }}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium transition-all border",
+              "folder-chip px-4 py-2 pr-8 font-mono uppercase text-sm transition-colors",
               activeCategory === category
-                ? "bg-accent text-accent-foreground border-accent"
-                : "bg-card/50 text-muted-foreground border-border hover:bg-card hover:text-foreground hover:border-border/80"
+                ? "bg-ink text-white"
+                : "bg-muted text-ink hover:bg-yellow-pastel"
             )}
           >
             {category}
@@ -71,29 +189,34 @@ export function ProjectsList({ projects }: ProjectsListProps) {
         ))}
       </div>
 
-      {/* Projects List */}
-      <div className="space-y-4">
-        {filteredProjects.map((project, index) => (
+      {/* Cards */}
+      <div className="grid md:grid-cols-2 gap-x-8 gap-y-12 items-start">
+        {filteredProjects.map((project) => (
           <div
             key={project.slug}
-            ref={(el) => { itemRefs.current[project.slug] = el; }}
+            id={project.slug}
+            className="scroll-mt-28"
+            ref={(el) => {
+              itemRefs.current[project.slug] = el;
+            }}
           >
-            <ProjectTeaser
+            <ProjectCard
               project={project}
               isExpanded={expandedSlug === project.slug}
-              onToggle={() => handleToggle(project.slug)}
-              index={index}
+              onToggle={() =>
+                setExpandedSlug(expandedSlug === project.slug ? null : project.slug)
+              }
             />
           </div>
         ))}
       </div>
 
       {filteredProjects.length === 0 && (
-        <div className="py-20 text-center text-muted-foreground border border-dashed border-border rounded-xl bg-card/30">
-          <p>No projects found in this category.</p>
+        <div className="py-20 text-center text-muted-foreground border-2 border-dashed border-ink/20 bg-white">
+          <p className="font-mono uppercase text-sm">Nothing in this drawer.</p>
           <button
             onClick={() => setActiveCategory("All")}
-            className="mt-4 text-sm text-accent hover:text-accent-hover transition-colors"
+            className="mt-4 font-mono uppercase text-sm text-ink border-b-2 border-ink pb-0.5"
           >
             View all projects
           </button>

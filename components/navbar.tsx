@@ -3,120 +3,94 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Home, Asterisk, Layers, PenLine, Heart, ArrowUpRight } from "lucide-react";
+import { site } from "@/lib/site";
+import { Ruler } from "@/components/canvas/ruler";
 
 const navItems = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Content", href: "/content" },
+  { name: "Home", href: "/", icon: Home },
+  { name: "About", href: "/about", icon: Asterisk },
+  { name: "Projects", href: "/projects", icon: Layers },
 ];
-
-// Context-aware CTA based on current page
-function getCtaConfig(pathname: string) {
-  switch (pathname) {
-    case "/projects":
-      return { label: "Start a Project", href: "#inquiry", isModal: true };
-    case "/about":
-      return { label: "See My Work", href: "/projects", isModal: false };
-    case "/content":
-      return { label: "Get in Touch", href: "mailto:awagih@outlook.com", isModal: false };
-    default:
-      return { label: "Get in Touch", href: "mailto:awagih@outlook.com", isModal: false };
-  }
-}
 
 export function Navbar() {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const ctaConfig = getCtaConfig(pathname);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-      <div className="container-custom flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-ink/10 shadow-[0_1px_0_rgba(17,18,18,0.04)]">
+      <nav className="flex items-stretch h-14 md:h-16">
         {/* Logo */}
         <Link
           href="/"
-          className="font-display font-bold text-xl tracking-tight text-foreground hover:text-accent transition-colors"
+          className="flex items-center px-4 md:px-6 border-r border-ink/10 shrink-0"
+          aria-label="Ali Wagih — home"
         >
-          Ali Wagih
+          <span className="font-pixel font-extrabold text-2xl leading-none tracking-tight text-ink">
+            AW
+          </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          <div className="flex gap-6">
-            {navItems.map((item) => (
+        {/* Tabs */}
+        <div className="flex items-stretch overflow-x-auto">
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+            return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors relative py-1",
-                  pathname === item.href
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                  "flex items-center gap-2 px-3 md:px-5 font-mono uppercase text-sm tracking-wide whitespace-nowrap transition-colors",
+                  active ? "bg-cyan text-ink" : "text-ink hover:bg-muted"
                 )}
               >
-                {item.name}
-                {pathname === item.href && (
-                  <span className="absolute -bottom-[1px] left-0 right-0 h-0.5 bg-accent" />
-                )}
+                <item.icon className="size-4" strokeWidth={2.25} />
+                <span className="hidden sm:inline">{item.name}</span>
               </Link>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <Link
-            href={ctaConfig.href}
-            className="inline-flex h-9 items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground shadow-sm transition-all hover:bg-accent-hover btn-glow-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            );
+          })}
+          <a
+            href={site.writing}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3 md:px-5 font-mono uppercase text-sm tracking-wide whitespace-nowrap text-ink hover:bg-muted transition-colors"
           >
-            {ctaConfig.label}
+            <PenLine className="size-4" strokeWidth={2.25} />
+            <span className="hidden sm:inline">Writing</span>
+            <ArrowUpRight className="size-3.5" strokeWidth={2.25} />
+          </a>
+        </div>
+
+        {/* Right side */}
+        <div className="ml-auto flex items-center gap-2 md:gap-3 px-3 md:px-6">
+          <a
+            href={`mailto:${site.email}`}
+            className="hidden sm:flex size-9 rounded-full bg-muted items-center justify-center font-mono text-xs uppercase text-ink hover:bg-yellow-pastel transition-colors"
+            aria-label="Email"
+            title={site.email}
+          >
+            EM
+          </a>
+          <a
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex size-9 rounded-full bg-muted items-center justify-center font-mono text-xs uppercase text-ink hover:bg-cyan-pastel transition-colors"
+            aria-label="LinkedIn"
+          >
+            LI
+          </a>
+          <Link
+            href="/contact"
+            className="flex items-center gap-2 border-2 border-ink px-3 md:px-4 py-2 font-mono uppercase text-sm text-ink hover:bg-ink hover:text-white transition-colors"
+          >
+            <Heart className="size-4 fill-current" />
+            Contact
           </Link>
         </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </button>
+      </nav>
+      <div className="hidden md:block">
+        <Ruler position="top" />
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md">
-          <div className="container-custom py-4 space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "block py-2 text-base font-medium transition-colors",
-                  pathname === item.href
-                    ? "text-accent"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Link
-              href={ctaConfig.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center py-3 rounded-md bg-accent text-accent-foreground font-medium hover:bg-accent-hover transition-colors"
-            >
-              {ctaConfig.label}
-            </Link>
-          </div>
-        </div>
-      )}
-    </nav>
+    </header>
   );
 }

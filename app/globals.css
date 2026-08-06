@@ -2,104 +2,69 @@
 
 @theme {
   /* Fonts */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-display: var(--font-space-grotesk), var(--font-sans);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: var(--font-handjet), var(--font-sans);
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+  --font-hand: var(--font-hand-google), cursive;
 
-  /* Dark Theme - Slate-950 Base */
-  --color-background: #020617;        /* slate-950 - near black */
-  --color-foreground: #f8fafc;        /* slate-50 - off white */
+  /* Canvas light theme */
+  --color-background: #ffffff;
+  --color-foreground: #111212;
+  --color-ink: #111212;
+  --color-grid: #ececec;
+  --color-muted: #f4f4f4;
+  --color-muted-foreground: #767777;
+  --color-faint: #aaabab;
+  --color-border: #111212;
 
-  /* Card & Surface colors */
-  --color-card: #0f172a;              /* slate-900 */
-  --color-card-elevated: #1e293b;     /* slate-800 */
+  /* Brand palette */
+  --color-cyan: #36c5f0;
+  --color-cyan-pastel: #a4e5f8;
+  --color-yellow: #ecb22e;
+  --color-yellow-pastel: #f5dda1;
+  --color-pink: #e01e5a;
+  --color-pink-pastel: #f6c1d4;
+  --color-green: #2eb67d;
+  --color-green-pastel: #a1dfc5;
+  --color-brown: #522e29;
 
-  /* Muted backgrounds */
-  --color-muted: #1e293b;             /* slate-800 */
-  --color-muted-foreground: #94a3b8;  /* slate-400 */
-
-  /* Borders */
-  --color-border: #334155;            /* slate-700 */
-  --color-border-subtle: #1e293b;     /* slate-800 */
-
-  /* Primary - Near black text */
-  --color-primary: #f8fafc;           /* slate-50 for text on dark */
-  --color-primary-foreground: #020617; /* slate-950 for text on light buttons */
-
-  /* Accent Primary - Orange */
-  --color-accent: #f97316;            /* orange-500 */
-  --color-accent-hover: #fb923c;      /* orange-400 */
-  --color-accent-foreground: #020617; /* slate-950 */
-
-  /* Accent Secondary - Cyan */
-  --color-cyan: #06b6d4;              /* cyan-500 */
-  --color-cyan-glow: rgba(6, 182, 212, 0.4);
-
-  /* Ring for focus states */
-  --color-ring: #f97316;              /* orange-500 */
+  --color-ring: #36c5f0;
 }
 
-/* Custom utilities */
 @layer utilities {
   .container-custom {
-    @apply max-w-6xl mx-auto px-6 md:px-8;
+    @apply max-w-6xl mx-auto px-5 md:px-8;
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  /* Glow effects */
-  .glow-orange {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+  /* Grid-paper canvas background */
+  .grid-paper {
+    background-image: linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+    background-size: 154px 154px;
   }
 
-  .glow-cyan {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1);
+  /* Uppercase mono label */
+  .mono-label {
+    @apply font-mono uppercase tracking-wide text-sm;
   }
 
-  .glow-orange-subtle {
-    box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+  /* Folder-tab chip: notched top-right corner */
+  .folder-chip {
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 14px, 100% 100%, 0 100%);
   }
 
-  .glow-cyan-subtle {
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+  /* Project panel tab notch (big, top-left tab shape) */
+  .panel-tab {
+    clip-path: polygon(0 0, calc(100% - 56px) 0, 100% 100%, 0 100%);
   }
 
-  /* Gradient text */
-  .text-gradient-orange {
-    @apply bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent;
+  .hand-note {
+    @apply font-hand text-2xl leading-tight text-ink;
   }
-
-  .text-gradient-cyan {
-    @apply bg-gradient-to-r from-cyan-400 to-teal-500 bg-clip-text text-transparent;
-  }
-
-  /* Card styles */
-  .card-dark {
-    @apply bg-card border border-border/50 rounded-xl;
-  }
-
-  .card-dark-elevated {
-    @apply bg-card-elevated border border-border/50 rounded-xl;
-  }
-
-  /* Button glow on hover */
-  .btn-glow-orange:hover {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.4), 0 0 40px rgba(249, 115, 22, 0.2);
-  }
-
-  .btn-glow-cyan:hover {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), 0 0 40px rgba(6, 182, 212, 0.2);
-  }
-}
-
-/* Float animation for static project images (Option A) */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-4px); }
-}
-.animate-float {
-  animation: float 5s ease-in-out infinite;
 }
 
 /* Base body styles */
@@ -111,27 +76,42 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Selection colors */
 ::selection {
-  background: rgba(249, 115, 22, 0.3);
-  color: #f8fafc;
+  background: rgba(54, 197, 240, 0.35);
+  color: #111212;
 }
 
-/* Scrollbar styling for dark theme */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: #c6c6c7;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #767777;
+}
+
+/* Blinking caret for the typewriter bubble */
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.caret-blink {
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

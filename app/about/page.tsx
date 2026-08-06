@@ -1,224 +1,336 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { HeroSection } from "@/components/hero-section";
-import { InteractiveHeadshot } from "@/components/interactive-headshot";
-import { SectionHeading } from "@/components/section-heading";
-import { ArrowRight, Heart, Target, Zap, Shield, Eye, Lightbulb } from "lucide-react";
+import Image from "next/image";
+import {
+  Heart,
+  Target,
+  Zap,
+  Shield,
+  Eye,
+  Lightbulb,
+  Cog,
+  Shapes,
+  Sparkle,
+  HardHat,
+  GraduationCap,
+  Building2,
+  Sparkles,
+} from "lucide-react";
+import {
+  PixelHeading,
+  SelectionFrame,
+  StickyNote,
+  Handwritten,
+  SketchArrow,
+  CursorBadge,
+  FolderChip,
+} from "@/components/canvas/canvas";
+import { Reveal } from "@/components/canvas/reveal";
+import { YouCursor } from "@/components/canvas/you-cursor";
+import { LetsTalk } from "@/components/lets-talk";
 
 const coreValues = [
   {
     icon: Heart,
+    tone: "cyan",
     title: "Software is for people",
-    description: "Every tool gets used by a real person having a real day. I build for them, not for the demo.",
+    description:
+      "Every tool gets used by a real person having a real day. I build for them, not for the demo.",
   },
   {
     icon: Eye,
+    tone: "yellow",
     title: "Plain beats clever",
-    description: "A simple thing that works beats a clever thing nobody understands. I reach for the boring solution first.",
+    description:
+      "A simple thing that works beats a clever thing nobody understands. I reach for the boring solution first.",
   },
   {
     icon: Target,
+    tone: "pink",
     title: "I own the outcome",
-    description: "Shipping a feature isn't the point. I care whether it actually made someone's job easier.",
+    description:
+      "Shipping a feature isn't the point. I care whether it actually made someone's job easier.",
   },
   {
     icon: Zap,
+    tone: "green",
     title: "Start small, learn fast",
-    description: "I'd rather put a rough version in front of someone this week than a perfect one next quarter.",
+    description:
+      "I'd rather put a rough version in front of someone this week than a perfect one next quarter.",
   },
   {
     icon: Lightbulb,
+    tone: "yellow",
     title: "Cut what you can",
-    description: "Most of building well is deciding what not to build. I try to do less, better.",
+    description:
+      "Most of building well is deciding what not to build. I try to do less, better.",
   },
   {
     icon: Shield,
+    tone: "cyan",
     title: "It has to hold up",
-    description: "I came from work where failure had consequences. I don't ship things I wouldn't trust.",
+    description:
+      "I came from work where failure had consequences. I don't ship things I wouldn't trust.",
+  },
+] as const;
+
+const timeline = [
+  {
+    icon: Sparkles,
+    iconBg: "bg-cyan",
+    name: "Manara Ventures",
+    role: "Founder",
+    period: "2026 - Current",
+    current: true,
+    description:
+      "I started Manara Ventures in Vancouver to help construction and operations teams put practical AI to work: assessments, automation builds, marketing sites, and hands-on coaching. It's also where I ship my own products, like LienClock, a lien and prompt-payment deadline tracker for BC contractors.",
+  },
+  {
+    icon: HardHat,
+    iconBg: "bg-yellow",
+    name: "Marine Construction PM",
+    role: "Project Manager",
+    period: "2022 - Current",
+    current: true,
+    description:
+      "Running marine construction projects worth millions: budgets, schedules, contractors, and the weather. This is where I learned how work actually gets delivered when a lot is on the line.",
+  },
+  {
+    icon: GraduationCap,
+    iconBg: "bg-green",
+    name: "Computer Science, UBC",
+    role: "Student",
+    period: "2023 - 2026",
+    current: false,
+    description:
+      "Went back to school to build the tools I kept wishing existed on site. Algorithms and systems by day, shipping side projects by night.",
+  },
+  {
+    icon: Building2,
+    iconBg: "bg-pink",
+    name: "Civil Engineering",
+    role: "Engineer",
+    period: "2019 - 2022",
+    current: false,
+    description:
+      "My first work was on real infrastructure: bridges and marine structures, where a mistake isn't a bug, it's a safety report. It taught me to respect constraints.",
   },
 ];
 
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
+const rail = [
+  { href: "#bio", label: "Bio", icon: Cog },
+  { href: "#story", label: "Story", icon: Shapes },
+  { href: "#work", label: "Work", icon: Sparkle },
+];
 
 export default function About() {
   return (
-    <div className="flex flex-col">
-      <HeroSection
-        eyebrow="About me"
-        title={["I left construction project management", "to build software tools for the industries I know best."]}
-        description={
-          <p>
-            For years I managed marine construction projects. Now I build
-            software for the same kind of work, and I still think like someone
-            who has to answer for what gets delivered.
-          </p>
-        }
-        compact
-      />
+    <div className="overflow-x-clip">
+      <YouCursor />
 
-      {/* Interactive Headshot Section */}
-      <section className="py-16 md:py-24">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <InteractiveHeadshot />
-            <div className="space-y-6">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
-                An unusual path to software
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Most software people came up through computer science. I came up
-                through civil engineering, then years of project management on
-                marine infrastructure, and only then computer science.
+      {/* Floating section rail */}
+      <nav className="hidden xl:flex flex-col gap-6 fixed left-6 top-1/2 -translate-y-1/2 z-40 bg-white rounded-3xl shadow-[0_10px_36px_rgba(17,18,18,0.14)] px-5 py-8">
+        {rail.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className="flex flex-col items-center gap-1.5 group"
+          >
+            <span className="size-11 rounded-xl flex items-center justify-center text-ink group-hover:bg-ink group-hover:text-white transition-colors">
+              <item.icon className="size-5" strokeWidth={2.25} />
+            </span>
+            <span className="font-mono uppercase text-xs text-ink">{item.label}</span>
+          </a>
+        ))}
+      </nav>
+
+      {/* ── Title ────────────────────────────────────────────── */}
+      <section className="container-custom pt-14 md:pt-20 pb-10">
+        <Reveal>
+          <PixelHeading as="h1" className="text-7xl md:text-[10rem]">
+            About
+          </PixelHeading>
+        </Reveal>
+      </section>
+
+      {/* ── Bio ──────────────────────────────────────────────── */}
+      <section id="bio" className="container-custom pb-24 scroll-mt-28">
+        <span className="inline-block bg-yellow font-mono uppercase text-sm px-3 py-1.5 mb-4 ml-2">
+          Main bio
+        </span>
+        <Reveal>
+          <SelectionFrame tone="yellow" className="bg-white/80 backdrop-blur-sm px-6 md:px-14 py-10 md:py-14">
+            <div className="max-w-3xl mx-auto">
+              <p className="text-3xl md:text-5xl font-medium tracking-tight text-ink leading-snug">
+                I&apos;m Ali{" "}
+                <Image
+                  src="/headshot-cropped.png"
+                  alt="Ali Wagih"
+                  width={96}
+                  height={96}
+                  className="inline-block size-11 md:size-14 object-cover object-top rounded-lg border-2 border-ink align-middle"
+                />{" "}
+                a civil engineer turned software builder, and the founder of{" "}
+                <a
+                  href="https://manaraventures.ca"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-cyan decoration-4 underline-offset-4 hover:bg-cyan-pastel transition-colors"
+                >
+                  Manara Ventures
+                </a>{" "}
+                <Sparkles className="inline size-8 md:size-10 text-yellow align-middle" />.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Each step left me with something. Engineering taught me to
-                respect constraints. Project management taught me how to deliver
-                when a dozen people and a deadline are involved. Computer science
-                gave me the tools to build the fixes I used to only complain
-                about.
+              <div className="mt-8 space-y-4 text-lg text-ink/75 leading-relaxed">
+                <p>
+                  Most software people came up through computer science. I came
+                  up through civil engineering, then years of project management
+                  on marine infrastructure, and only then computer science.
+                </p>
+                <p>
+                  Each step left me with something. Engineering taught me to
+                  respect constraints. Project management taught me how to
+                  deliver when a dozen people and a deadline are involved.
+                  Computer science gave me the tools to build the fixes I used
+                  to only complain about.
+                </p>
+              </div>
+            </div>
+          </SelectionFrame>
+        </Reveal>
+      </section>
+
+      {/* ── Story ────────────────────────────────────────────── */}
+      <section id="story" className="container-custom pb-24 scroll-mt-28">
+        <div className="relative max-w-5xl mx-auto space-y-14">
+          <CursorBadge name="My story" tone="pink" className="hidden md:flex absolute -top-8 right-8" />
+
+          <Reveal className="md:w-3/5">
+            <div className="bg-cyan-pastel px-7 py-7">
+              <h3 className="text-2xl md:text-3xl font-semibold text-ink mb-4">
+                Starting on the water
+              </h3>
+              <p className="text-ink/80 leading-relaxed">
+                I started in civil engineering, building real things in rough
+                marine conditions. As a project manager I handled the budgets,
+                the negotiations, and the parts nobody warns you about, like
+                planning concrete pours around tide charts and weather windows.
+                What stuck with me was how much time got wasted: data lived in
+                ten different places, and good engineers spent their afternoons
+                copy-pasting between spreadsheets.
               </p>
             </div>
+          </Reveal>
+
+          <div className="hidden md:flex justify-center items-center gap-3">
+            <SketchArrow />
+            <Handwritten className="text-2xl rotate-2">then it clicked!</Handwritten>
           </div>
+
+          <Reveal className="md:w-3/5 md:ml-auto">
+            <div className="bg-yellow-pastel px-7 py-7">
+              <h3 className="text-2xl md:text-3xl font-semibold text-ink mb-4">
+                The pivot
+              </h3>
+              <p className="text-ink/80 leading-relaxed">
+                It became obvious the biggest improvements wouldn&apos;t come
+                from better materials. They&apos;d come from better information.
+                So I went back to school for computer science and started
+                building the tools I kept wishing I had, using AI to kill the
+                busywork rather than to look impressive.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="hidden md:flex justify-start items-center gap-3 pl-16">
+            <Handwritten className="text-2xl -rotate-3">so I made it official:</Handwritten>
+            <SketchArrow flip />
+          </div>
+
+          <Reveal className="md:w-3/5">
+            <div className="bg-green-pastel px-7 py-7">
+              <h3 className="text-2xl md:text-3xl font-semibold text-ink mb-4">
+                Starting Manara
+              </h3>
+              <p className="text-ink/80 leading-relaxed">
+                In 2026 I founded Manara Ventures, a Vancouver consulting
+                company at the intersection of construction operations and
+                practical AI. I help teams figure out where AI actually pays
+                off, build the automations and dashboards to get them there,
+                and ship products of my own along the way. I can still sit in a
+                site meeting and a code review on the same day, and that&apos;s
+                the point.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Narrative Section */}
-      <section className="py-16 md:py-24 bg-card/30">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto space-y-16">
-            {/* The Background */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h3 className="font-display text-2xl font-bold text-foreground mb-6">
-                The Background
-              </h3>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  I started in civil engineering, building real things in rough
-                  marine conditions. As a project manager I handled the budgets,
-                  the negotiations, and the parts nobody warns you about, like
-                  planning concrete pours around tide charts and weather windows.
-                </p>
-                <p>
-                  What stuck with me was how much time got wasted. Data lived in
-                  ten different places, decisions got made on last week's
-                  numbers, and good engineers spent their afternoons
-                  copy-pasting between spreadsheets.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* The Pivot */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h3 className="font-display text-2xl font-bold text-foreground mb-6">
-                The Pivot
-              </h3>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  It became obvious the biggest improvements wouldn't come from
-                  better materials. They'd come from better information. So I
-                  went back to school for computer science to build the tools I
-                  kept wishing I had.
-                </p>
-                <p>
-                  That's what I do now. I can sit in a site meeting and a code
-                  review on the same day, and I build software that takes the
-                  domain seriously instead of treating it as an afterthought,
-                  using AI to kill the busywork rather than to look impressive.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+      {/* ── Values ───────────────────────────────────────────── */}
+      <section className="container-custom pb-28">
+        <div className="text-center mb-12">
+          <Handwritten className="text-3xl">what I care about</Handwritten>
         </div>
-      </section>
-
-      {/* Core Values */}
-      <section className="py-24 md:py-32">
-        <div className="container-custom">
-          <SectionHeading
-            title="What I care about"
-            subtitle="A few things I've come to believe after building in two very different worlds."
-            centered
-          />
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
-          >
-            {coreValues.map((value) => (
-              <motion.div
-                key={value.title}
-                variants={itemVariants}
-                className="p-6 rounded-xl bg-card/50 border border-border/50 hover:bg-card hover:border-border transition-all"
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {coreValues.map((value, i) => (
+            <Reveal key={value.title} delay={(i % 3) * 0.08}>
+              <StickyNote
+                tone={value.tone}
+                rotate={i % 2 ? "rotate-1" : "-rotate-1"}
+                className="h-full"
               >
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <value.icon className="w-5 h-5 text-accent" />
+                <value.icon className="size-6 text-ink mb-3" strokeWidth={2.25} />
+                <h4 className="font-semibold text-ink mb-1.5">{value.title}</h4>
+                <p className="text-sm text-ink/75 leading-relaxed">{value.description}</p>
+              </StickyNote>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Timeline ─────────────────────────────────────────── */}
+      <section id="work" className="container-custom pb-24 scroll-mt-28">
+        <span className="inline-block bg-cyan font-mono uppercase text-sm px-3 py-1.5 mb-4 ml-2">
+          Where I&apos;ve been
+        </span>
+        <Reveal>
+          <SelectionFrame tone="cyan" className="bg-white/80 backdrop-blur-sm px-6 md:px-14 py-10 md:py-12">
+            <p className="text-muted-foreground text-xl mb-2">Timeline</p>
+            <div className="divide-y divide-grid">
+              {timeline.map((entry) => (
+                <div key={entry.name} className="py-10">
+                  <div className="flex items-center gap-4">
+                    <span className={`size-10 ${entry.iconBg} flex items-center justify-center shrink-0`}>
+                      <entry.icon className="size-5 text-ink" strokeWidth={2.25} />
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-ink">
+                      {entry.name}
+                    </h3>
+                  </div>
+                  <p className="mt-4 text-lg text-ink/75 leading-relaxed max-w-3xl md:pl-14">
+                    {entry.description}
+                  </p>
+                  <div className="mt-5 md:pl-14">
+                    <span
+                      className={
+                        "inline-flex items-center gap-2 font-mono uppercase text-sm px-4 py-2 border-2 " +
+                        (entry.current
+                          ? "border-cyan bg-cyan-pastel text-ink"
+                          : "border-ink/20 text-muted-foreground")
+                      }
+                    >
+                      <Zap className="size-4 fill-current" /> {entry.period}
+                    </span>
+                  </div>
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">
-                  {value.title}
-                </h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+              ))}
+            </div>
+          </SelectionFrame>
+        </Reveal>
+        <div className="mt-8 flex justify-end">
+          <FolderChip>P.Eng · Vancouver, BC</FolderChip>
         </div>
       </section>
 
-
-      {/* CTA to Content */}
-      <section className="py-16 md:py-20">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-muted-foreground mb-6">
-              Curious what I'm thinking about lately?
-            </p>
-            <Link
-              href="/content"
-              className="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors font-medium"
-            >
-              See my writing and videos
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      <LetsTalk />
     </div>
   );
 }
