@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Home, Asterisk, Layers, PenLine, Heart, ArrowUpRight } from "lucide-react";
+import { Home, Asterisk, Layers, PenLine, Heart, ArrowUpRight, Mail, Linkedin } from "lucide-react";
 import { site } from "@/lib/site";
 import { Ruler } from "@/components/canvas/ruler";
 
@@ -64,20 +64,20 @@ export function Navbar() {
         <div className="ml-auto flex items-center gap-2 md:gap-3 px-3 md:px-6">
           <a
             href={`mailto:${site.email}`}
-            className="hidden sm:flex size-9 rounded-full bg-muted items-center justify-center font-mono text-xs uppercase text-ink hover:bg-yellow-pastel transition-colors"
+            className="hidden sm:flex p-1.5 text-ink hover:text-muted-foreground transition-colors"
             aria-label="Email"
             title={site.email}
           >
-            EM
+            <Mail className="size-5" strokeWidth={2.25} />
           </a>
           <a
             href={site.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex size-9 rounded-full bg-muted items-center justify-center font-mono text-xs uppercase text-ink hover:bg-cyan-pastel transition-colors"
+            className="hidden sm:flex p-1.5 text-ink hover:text-muted-foreground transition-colors"
             aria-label="LinkedIn"
           >
-            LI
+            <Linkedin className="size-5" strokeWidth={2.25} />
           </a>
           <Link
             href="/contact"
