@@ -1,5 +1,5 @@
-import Image from "next/image";
 import {
+  Hand,
   Heart,
   Target,
   Zap,
@@ -24,7 +24,6 @@ import {
   FolderChip,
 } from "@/components/canvas/canvas";
 import { Reveal } from "@/components/canvas/reveal";
-import { YouCursor } from "@/components/canvas/you-cursor";
 import { LetsTalk } from "@/components/lets-talk";
 
 const coreValues = [
@@ -88,8 +87,8 @@ const timeline = [
     iconBg: "bg-yellow",
     name: "Marine Construction PM",
     role: "Project Manager",
-    period: "2022 - Current",
-    current: true,
+    period: "2022 - 2026",
+    current: false,
     description:
       "Running marine construction projects worth millions: budgets, schedules, contractors, and the weather. This is where I learned how work actually gets delivered when a lot is on the line.",
   },
@@ -124,8 +123,6 @@ const rail = [
 export default function About() {
   return (
     <div className="overflow-x-clip">
-      <YouCursor />
-
       {/* Floating section rail */}
       <nav className="hidden xl:flex flex-col gap-6 fixed left-6 top-1/2 -translate-y-1/2 z-40 bg-white rounded-3xl shadow-[0_10px_36px_rgba(17,18,18,0.14)] px-5 py-8">
         {rail.map((item) => (
@@ -161,13 +158,9 @@ export default function About() {
             <div className="max-w-3xl mx-auto">
               <p className="text-3xl md:text-5xl font-medium tracking-tight text-ink leading-snug">
                 I&apos;m Ali{" "}
-                <Image
-                  src="/headshot-cropped.png"
-                  alt="Ali Wagih"
-                  width={96}
-                  height={96}
-                  className="inline-block size-11 md:size-14 object-cover object-top rounded-lg border-2 border-ink align-middle"
-                />{" "}
+                <span className="inline-flex size-11 md:size-14 bg-cyan rounded-lg border-2 border-ink items-center justify-center align-middle -rotate-3">
+                  <Hand className="size-6 md:size-8 text-ink" strokeWidth={2.25} />
+                </span>{" "}
                 a civil engineer turned software builder, and the founder of{" "}
                 <a
                   href="https://manaraventures.ca"

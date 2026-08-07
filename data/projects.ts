@@ -70,6 +70,25 @@ export const projects: Project[] = [
       "Prototype built to show what agentic accounting can look like. Live dashboard with a build journey and an adoption guide.",
   },
   {
+    slug: "lienclock",
+    title: "LienClock",
+    displayTitle: "LienClock",
+    category: "Product",
+    status: "Shipped",
+    oneLiner:
+      "Deadline tracker for BC construction payments. A free lien and prompt-payment calculator, a CPPA readiness audit, and a paid tracker behind them.",
+    tags: ["Next.js", "TypeScript", "Supabase", "Resend", "SaaS"],
+    featured: true,
+    link: "https://lienclock.ca",
+    media: { type: "image", src: "/projects/lienclock/cover.png", alt: "LienClock — BC lien and prompt payment deadline tracker" },
+    problem:
+      "BC's Construction Prompt Payment Act adds strict new payment clocks on top of the existing lien deadlines. Miss one and you lose your leverage, or the money itself.",
+    solution:
+      "A dual-regime deadline engine that models both the current Builders Lien Act and the incoming CPPA rules, behind a free question-driven calculator and a readiness audit that emails a full report. The paid tracker adds holdback ledgers, SMS and email alerts, and lawyer-reviewed document drafts.",
+    result:
+      "Live at lienclock.ca ahead of the act coming into force, with a full demo workspace and a growing waitlist.",
+  },
+  {
     slug: "superintendent",
     title: "Superintendent",
     displayTitle: "Superintendent",
@@ -78,7 +97,7 @@ export const projects: Project[] = [
     oneLiner:
       "An AI project manager that flips the script. Coding agents ask it for clarification through Linear instead of stalling and waiting on you.",
     tags: ["TypeScript", "Node 20", "Ink", "Linear SDK", "Anthropic SDK", "SQLite", "Next.js"],
-    featured: true,
+    featured: false,
     media: { type: "placeholder" },
     problem:
       "Coding agents stall on ambiguous tickets, so people end up babysitting them instead of doing real work.",

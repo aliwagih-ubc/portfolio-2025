@@ -2,14 +2,11 @@ import { projects } from "@/data/projects";
 import { ProjectsList } from "@/components/projects-list";
 import { PixelHeading, Handwritten, StickyNote } from "@/components/canvas/canvas";
 import { Reveal } from "@/components/canvas/reveal";
-import { YouCursor } from "@/components/canvas/you-cursor";
 import { LetsTalk } from "@/components/lets-talk";
 
 export default function ProjectsPage() {
   return (
     <div className="overflow-x-clip">
-      <YouCursor />
-
       <section className="container-custom pt-14 md:pt-20 pb-12 relative">
         <Reveal>
           <PixelHeading as="h1" className="text-6xl sm:text-8xl md:text-[9rem]">

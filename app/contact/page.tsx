@@ -9,7 +9,6 @@ import {
   StickyNote,
 } from "@/components/canvas/canvas";
 import { Reveal } from "@/components/canvas/reveal";
-import { YouCursor } from "@/components/canvas/you-cursor";
 
 export const metadata: Metadata = {
   title: "Contact | Ali Wagih",
@@ -50,8 +49,6 @@ const channels = [
 export default function ContactPage() {
   return (
     <div className="overflow-x-clip">
-      <YouCursor />
-
       <section className="container-custom pt-16 md:pt-24 pb-24 md:pb-32">
         <div className="text-center">
           <Handwritten className="text-3xl">leave me a note</Handwritten>

@@ -83,7 +83,7 @@ export function Footer() {
           © {new Date().getFullYear()} Ali Wagih
         </span>
         <span className="font-mono text-xs uppercase text-faint">
-          Vancouver, BC · Built with Next.js
+          Vancouver, BC
         </span>
       </div>
 

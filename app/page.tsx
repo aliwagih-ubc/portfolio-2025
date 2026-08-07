@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ChevronsRight, Target, Hammer, Workflow, LayoutDashboard, HardHat } from "lucide-react";
+import { ChevronsRight, Hand, Target, Hammer, Workflow, LayoutDashboard, HardHat } from "lucide-react";
 import Link from "next/link";
 import {
   StickyNote,
@@ -13,7 +13,6 @@ import {
 import { Reveal } from "@/components/canvas/reveal";
 import { Typewriter } from "@/components/canvas/typewriter";
 import { LiveClock } from "@/components/canvas/live-clock";
-import { YouCursor } from "@/components/canvas/you-cursor";
 import { FeaturedPanels } from "@/components/featured-panels";
 import { LetsTalk } from "@/components/lets-talk";
 
@@ -27,8 +26,6 @@ const skills = [
 export default function Home() {
   return (
     <div className="overflow-x-clip">
-      <YouCursor />
-
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="container-custom relative pt-10 pb-24 md:pt-14 md:pb-32">
         <p className="text-center font-mono text-sm text-muted-foreground">
@@ -53,14 +50,14 @@ export default function Home() {
             rotate="-rotate-6"
             className="hidden md:block absolute -top-6 left-4 lg:left-16 z-10 max-w-56"
           >
-            <span className="font-medium">Currently building Manara Ventures</span>
+            <span className="font-medium">Currently a Consultant at Manara</span>
           </StickyNote>
           <StickyNote
             tone="yellow"
             rotate="rotate-3"
             className="hidden md:block absolute -top-2 right-4 lg:right-14 z-10 max-w-56"
           >
-            <span className="font-medium">Previously: marine construction PM</span>
+            <span className="font-medium">Previously a construction PM at RAM</span>
           </StickyNote>
 
           <Reveal>
@@ -76,7 +73,7 @@ export default function Home() {
             rotate="-rotate-6"
             className="hidden md:inline-block absolute -bottom-16 left-8 lg:left-24"
           >
-            <span className="font-mono uppercase text-sm">Engineer × Builder</span>
+            <span className="font-mono uppercase text-sm">Engineer × AI Builder</span>
           </StickyNote>
           <SketchArrow className="hidden md:block absolute -bottom-12 left-56 lg:left-72 -scale-y-100 rotate-12" />
           <span className="hidden md:inline-block absolute -bottom-20 right-10 lg:right-28 rotate-6 bg-pink text-white font-mono uppercase text-sm px-4 py-2.5 rounded-full rounded-tl-none border-2 border-ink shadow-[3px_4px_0_rgba(17,18,18,0.4)]">
@@ -130,30 +127,10 @@ export default function Home() {
           </SelectionFrame>
         </div>
 
-        <div className="relative">
-          <Reveal>
-            <p className="text-center text-3xl md:text-5xl font-medium tracking-tight text-ink leading-snug max-w-4xl mx-auto">
-              I&apos;m Ali{" "}
-              <Image
-                src="/headshot-cropped.png"
-                alt="Ali Wagih"
-                width={96}
-                height={96}
-                className="inline-block size-12 md:size-16 object-cover object-top rounded-lg border-2 border-ink align-middle"
-              />{" "}
-              a civil engineer turned software builder in Vancouver. I run{" "}
-              <a href="https://manaraventures.ca" target="_blank" rel="noopener noreferrer" className="underline decoration-cyan decoration-4 underline-offset-4 hover:bg-cyan-pastel transition-colors">
-                Manara Ventures
-              </a>
-              , helping construction and operations teams put AI to work{" "}
-              <Target className="inline size-8 md:size-10 text-pink align-middle" strokeWidth={2.5} />{" "}
-              and building products for industries that still run on paper.
-            </p>
-          </Reveal>
-
+        <div className="lg:flex lg:items-center lg:gap-12 max-w-5xl mx-auto">
           {/* polaroid */}
-          <Reveal delay={0.15} className="hidden lg:block absolute -left-6 top-8 w-52">
-            <div className="bg-white p-3 pb-8 shadow-[6px_10px_24px_rgba(17,18,18,0.18)] -rotate-6">
+          <Reveal delay={0.15} className="hidden lg:block w-52 shrink-0">
+            <div className="relative bg-white p-3 pb-8 shadow-[6px_10px_24px_rgba(17,18,18,0.18)] -rotate-6">
               <Image
                 src="/headshot-cropped.png"
                 alt="Ali Wagih"
@@ -165,6 +142,22 @@ export default function Home() {
                 2026
               </Handwritten>
             </div>
+          </Reveal>
+
+          <Reveal className="flex-1">
+            <p className="text-center lg:text-left text-3xl md:text-5xl font-medium tracking-tight text-ink leading-snug max-w-4xl mx-auto">
+              I&apos;m Ali{" "}
+              <span className="inline-flex size-12 md:size-16 bg-yellow rounded-lg border-2 border-ink items-center justify-center align-middle rotate-3">
+                <Hand className="size-7 md:size-9 text-ink" strokeWidth={2.25} />
+              </span>{" "}
+              a civil engineer turned software builder in Vancouver. I run{" "}
+              <a href="https://manaraventures.ca" target="_blank" rel="noopener noreferrer" className="underline decoration-cyan decoration-4 underline-offset-4 hover:bg-cyan-pastel transition-colors">
+                Manara Ventures
+              </a>
+              , helping construction and operations teams put AI to work{" "}
+              <Target className="inline size-8 md:size-10 text-pink align-middle" strokeWidth={2.5} />{" "}
+              and building products for industries that still run on paper.
+            </p>
           </Reveal>
         </div>
 
